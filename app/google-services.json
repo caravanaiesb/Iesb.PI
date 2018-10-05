@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "375293017854",
+    "firebase_url": "https://iesbcaravana.firebaseio.com",
+    "project_id": "iesbcaravana",
+    "storage_bucket": "iesbcaravana.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375293017854:android:bc9a2b943da97024",
+        "android_client_info": {
+          "package_name": "br.pi.iesb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "375293017854-tekhd7ud7btohgd0e1ebapbi7oi8f4hb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.pi.iesb",
+            "certificate_hash": "248fb773444499c7b66d1340c6b2d4abd1257f8f"
+          }
+        },
+        {
+          "client_id": "375293017854-1vplifie4u1288j5bph77hsqjbvbv203.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5x1ieZip--xbJGtbiSzQq3WGjy6DD2tg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "375293017854-1vplifie4u1288j5bph77hsqjbvbv203.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

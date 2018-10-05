@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Caravana</string>
+    <string name="email">Email</string>
+    <string name="Senha">Senha</string>
+    <string name="login">Login</string>
+    <string name="registrar_se">Registrar-se</string>
 </resources>
