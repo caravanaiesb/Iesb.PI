@@ -35,10 +35,17 @@ public class RegistroActivity extends AppCompatActivity {
         btnRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!edtEmail.getText().toString().equals("") && !edtSenha.getText().toString().equals("")) {
+
+
                 String email = edtEmail.getText().toString().trim();
                 String nome = edtNome.getText().toString().trim();
                 String senha = edtSenha.getText().toString().trim();
                 criarUser(email,nome,senha);
+            }else{
+                    alert("Preencha os campos");
+                }
+
             }
         });
     }

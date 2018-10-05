@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegistroActivity" />
-        <activity android:name=".PrincipalActivity"></activity>
+        <activity android:name=".PrincipalActivity" />
+        <activity android:name=".ResetsenhaActivity"></activity>
     </application>
 
 </manifest>

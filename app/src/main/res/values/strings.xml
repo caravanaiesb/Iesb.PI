@@ -6,4 +6,7 @@
     <string name="registrar_se">Registrar-se</string>
     <string name="nome">nome</string>
     <string name="voltar">Voltar</string>
+    <string name="esqueci_minha_senha">Esqueci minha Senha</string>
+    <string name="recuperar">Insira seu E-mail para recuperar sua conta.</string>
+    <string name="enviar">Enviar</string>
 </resources>
