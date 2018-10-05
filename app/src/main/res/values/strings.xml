@@ -4,4 +4,6 @@
     <string name="Senha">Senha</string>
     <string name="login">Login</string>
     <string name="registrar_se">Registrar-se</string>
+    <string name="nome">nome</string>
+    <string name="voltar">Voltar</string>
 </resources>
