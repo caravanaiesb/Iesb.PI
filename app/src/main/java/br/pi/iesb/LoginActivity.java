@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Intent i =  new Intent(LoginActivity.this,PrincipalActivity.class);
+                            Intent i =  new Intent(LoginActivity.this,MapsActivity.class);
                             startActivity(i);
                         }else{
                             alert("E-mail ou Senha Invalido");
