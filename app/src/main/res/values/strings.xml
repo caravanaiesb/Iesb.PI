@@ -10,4 +10,6 @@
     <string name="recuperar">Insira seu E-mail para recuperar sua conta.</string>
     <string name="enviar">Enviar</string>
     <string name="title_activity_maps">Map</string>
+    <string name="sair">SAIR</string>
+    <string name="textview">TextView</string>
 </resources>
