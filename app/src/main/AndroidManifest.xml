@@ -39,7 +39,7 @@
             android:value="@string/facebook_client_token"/>
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".MapsFragment"
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".MenuActivity"
