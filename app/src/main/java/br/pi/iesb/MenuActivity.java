@@ -1,5 +1,6 @@
 package br.pi.iesb;
 
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -17,6 +18,7 @@ public class MenuActivity extends AppCompatActivity
 
 
     private FragmentManager fragmentManager;
+
 
 
     @Override

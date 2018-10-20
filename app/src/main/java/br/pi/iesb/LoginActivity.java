@@ -213,6 +213,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     protected void onStart() {
         super.onStart();
         auth = Dao.getFirebaseAuth();
+
     }
 
     @Override
