@@ -12,4 +12,17 @@
     <string name="title_activity_maps">Map</string>
     <string name="sair">SAIR</string>
     <string name="textview">TextView</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="feed_de_eventos">Feed de Eventos</string>
+    <string name="facebook_app_id">712210635810492</string>
+    <string name="fb_login_protocol_scheme">fb712210635810492</string>
+    <string name="facebook_client_token">434f5f82d28b81e21f1cbbc5493fed22</string>
+
+
 </resources>
