@@ -9,5 +9,11 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/feed_de_eventos" />
     </group>
+    <group android:checkableBehavior="all">
+        <item
+            android:id="@+id/menuSair"
+            android:icon="@mipmap/ic_sair"
+            android:title="@string/Sair" />
+    </group>
 
 </menu>

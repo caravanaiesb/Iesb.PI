@@ -23,6 +23,7 @@
     <string name="facebook_app_id">712210635810492</string>
     <string name="fb_login_protocol_scheme">fb712210635810492</string>
     <string name="facebook_client_token">434f5f82d28b81e21f1cbbc5493fed22</string>
+    <string name="Sair">Sair</string>
 
 
 </resources>
