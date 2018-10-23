@@ -12,7 +12,7 @@
     <group android:checkableBehavior="all">
         <item
             android:id="@+id/menuSair"
-            android:icon="@mipmap/ic_sair"
+            android:icon="@drawable/ic_sair"
             android:title="@string/Sair" />
     </group>
 
