@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Caravana</string>
     <string name="email">Email</string>
     <string name="Senha">Senha</string>
@@ -24,6 +24,14 @@
     <string name="fb_login_protocol_scheme">fb712210635810492</string>
     <string name="facebook_client_token">434f5f82d28b81e21f1cbbc5493fed22</string>
     <string name="Sair">Sair</string>
+    <string name="title_activity_feedevent">FeedeventActivity</string>
+    <string name="title_activity_cadastroevento">CadastroeventoActivity</string>
+    <string name="cadastrar_evento">Cadastrar Evento</string>
+    <string name="nome_do_evento">Nome do Evento</string>
+    <string name="tipo_de_evento">Tipo de Evento</string>
+    <string name="data_do_evento">Data do Evento</string>
+    <string name="date_event">DD.MM.AAAA</string>
+    <string name="atracao_principal" tools:ignore="ExtraTranslation">Atração Principal</string>
 
 
 </resources>
