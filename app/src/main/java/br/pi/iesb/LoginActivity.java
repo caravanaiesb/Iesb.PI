@@ -1,10 +1,13 @@
 package br.pi.iesb;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -58,6 +61,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         conectarGoogleApi();
         accessToken = AccessToken.getCurrentAccessToken();
         AppEventsLogger.activateApp(this);
+
+        if (ActivityCompat.checkSelfPermission(LoginActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(LoginActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
     }
 
 
@@ -168,7 +175,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        Intent i = new Intent(LoginActivity.this,FeedeventActivity.class);
+                        Intent i = new Intent(LoginActivity.this,MenuActivity.class);
                         startActivity(i);
                     }
                     else{

@@ -1,5 +1,6 @@
 package br.pi.iesb;
 
+import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -133,7 +134,8 @@ public class MenuActivity extends AppCompatActivity
 
 
         if (id == R.id.icon_eventos) {
-
+            Intent i = new Intent(MenuActivity.this,FeedeventActivity.class);
+            startActivity(i);
         }
         else if(id== R.id.menuSair){
             signOut();
