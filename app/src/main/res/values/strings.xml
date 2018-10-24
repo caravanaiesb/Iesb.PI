@@ -32,6 +32,9 @@
     <string name="data_do_evento">Data do Evento</string>
     <string name="date_event">DD.MM.AAAA</string>
     <string name="atracao_principal" tools:ignore="ExtraTranslation">Atração Principal</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="descri_o_do_evento">Descrição do evento</string>
 
 
 </resources>
