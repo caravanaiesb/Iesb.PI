@@ -3,10 +3,10 @@ package br.pi.iesb;
 import java.util.ArrayList;
 
 public class Evento {
-    public String txtNomeEvento;
-    public String txtTipoEvento;
-    public String txtDataEvento;
-    public String txtAtracaoPrincipal;
+    private String txtNomeEvento;
+    private String txtTipoEvento;
+    private String txtDataEvento;
+    private String txtAtracaoPrincipal;
 
 
     public Evento(){
@@ -23,5 +23,35 @@ public class Evento {
 
     }
 
+    public String getTxtNomeEvento() {
+        return txtNomeEvento;
+    }
 
+    public void setTxtNomeEvento(String txtNomeEvento) {
+        this.txtNomeEvento = txtNomeEvento;
+    }
+
+    public String getTxtTipoEvento() {
+        return txtTipoEvento;
+    }
+
+    public void setTxtTipoEvento(String txtTipoEvento) {
+        this.txtTipoEvento = txtTipoEvento;
+    }
+
+    public String getTxtDataEvento() {
+        return txtDataEvento;
+    }
+
+    public void setTxtDataEvento(String txtDataEvento) {
+        this.txtDataEvento = txtDataEvento;
+    }
+
+    public String getTxtAtracaoPrincipal() {
+        return txtAtracaoPrincipal;
+    }
+
+    public void setTxtAtracaoPrincipal(String txtAtracaoPrincipal) {
+        this.txtAtracaoPrincipal = txtAtracaoPrincipal;
+    }
 }

@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +29,9 @@ public class CadastroeventoActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private List<Evento> eventos = new ArrayList<>();
     private List<Evento> listaRecuperada = new ArrayList<>();
+    private DatabaseReference databaseReference;
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseRecyclerAdapter<Evento,EventRecycleViewHolder> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +56,26 @@ public class CadastroeventoActivity extends AppCompatActivity {
         btnCadastrarEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cadastraEvento();
 
-                Evento c = new Evento(txtNomeEvento.getText().toString(),txtTipoEvento.getText().toString(),txtDataEvento.getText().toString(),txtAtracaoPrincipal.getText().toString());
-
-                database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("Eventos");
-                myRef.push().setValue(c);
-                finish();
             }
         });
+
+    }
+
+
+    private void cadastraEvento() {
+        Evento c = new Evento(txtNomeEvento.getText().toString(),txtTipoEvento.getText().toString(),txtDataEvento.getText().toString(),txtAtracaoPrincipal.getText().toString());
+
+        database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Eventos");
+        myRef.push().setValue(c);
+        adapter.notifyDataSetChanged();
+
+
+
+        finish();
+
     }
 
 

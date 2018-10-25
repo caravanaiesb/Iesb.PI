@@ -119,7 +119,9 @@ public class MenuActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent i = new Intent(MenuActivity.this,CadastroeventoActivity.class);
+            startActivity(i);
+
         }
 
         return super.onOptionsItemSelected(item);
