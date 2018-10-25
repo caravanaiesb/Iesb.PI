@@ -8,15 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolderEvento> {
 
-    private List<Evento> dados;
+    private List<Evento> dados = new ArrayList<>();
 
 
-    public EventAdapter(List<Evento>    dados){
+    public EventAdapter(List<Evento> dados){
         this.dados=dados;
     }
 
@@ -33,21 +35,22 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolderEv
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EventAdapter.ViewHolderEvento viewHolder, int i) {
+    public void onBindViewHolder(EventAdapter.ViewHolderEvento viewHolder, int i) {
 
         if((dados!=null) && (dados.size() >0)) {
-            Evento evento = dados.get(i);
-
-            viewHolder.txtListEvent.setText(evento.txtNomeEvento);
+            Evento evento = new Evento();
+            evento= dados.get(i);
+            if(evento==dados.get(i)){
+           /* viewHolder.txtListEvent.setText(evento.txtNomeEvento);
             viewHolder.txtListDescEvent.setText(evento.txtTipoEvento);
-            viewHolder.txtListAtracao.setText(evento.txtAtracaoPrincipal);
-        }
+            viewHolder.txtListAtracao.setText(evento.txtAtracaoPrincipal);*/
+        }}
     }
 
     @Override
     public int getItemCount() {
 
-        return 1;
+        return dados.size();
     }
 
     public class ViewHolderEvento extends RecyclerView.ViewHolder{
@@ -57,7 +60,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolderEv
 
         public ViewHolderEvento(@NonNull View itemView) {
             super(itemView);
-
+            imgListEvent = itemView.findViewById(R.id.imgListEvent);
             txtListEvent = itemView.findViewById(R.id.txtNomeEvento);
             txtListDescEvent = itemView.findViewById(R.id.txtTipoEvento);
             txtListAtracao = itemView.findViewById(R.id.txtAtracaoPrincipal);

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,41 +32,25 @@ public class FeedeventActivity extends AppCompatActivity {
     private RecyclerView listaDados;
     private EventAdapter eventAdapter;
     private FirebaseDatabase database;
-    private ArrayList<Evento> eventList;
-    private ArrayList<Evento> lista;
+    private List<Evento> eventosLista = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feedevent);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        RecuperarLista();
-
-
-
-
-
-
-        setSupportActionBar(toolbar);
-        listaDados = (RecyclerView) findViewById(R.id.listaDados);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        listaDados.setLayoutManager(linearLayoutManager);
-        List<Evento> dados = RecuperarLista();
-        eventAdapter = new EventAdapter(dados);
-        listaDados.setAdapter(eventAdapter);
-        }
-
-    private ArrayList<Evento> RecuperarLista() {
-        database=FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Eventos");
-        DatabaseReference refEventos = database.getReference("Eventos/Eventos");
-        refEventos.addValueEventListener(new ValueEventListener() {
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                eventList=dataSnapshot.getValue(Evento.class);
-
-
+                eventosLista.clear();
+                for(DataSnapshot snap : dataSnapshot.getChildren()){
+                    Evento a =snap.getValue(Evento.class);
+                    Log.d("Eventos",a.toString());
+                    eventosLista.add(a);
+                }
+                eventAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -73,9 +58,15 @@ public class FeedeventActivity extends AppCompatActivity {
 
             }
         });
+        setSupportActionBar(toolbar);
+        listaDados = (RecyclerView) findViewById(R.id.listaDados);
 
-        return eventList;
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        listaDados.setLayoutManager(linearLayoutManager);
+        eventAdapter = new EventAdapter(eventosLista);
+        listaDados.setAdapter(eventAdapter);
     }
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
