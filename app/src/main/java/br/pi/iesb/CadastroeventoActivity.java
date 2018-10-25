@@ -56,48 +56,12 @@ public class CadastroeventoActivity extends AppCompatActivity {
 
                 database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference("Eventos");
-                if(recuperaLista()!=null){
-                    alert("Nulo msm");
-                }
-                myRef.setValue(recuperaLista());
-                Intent i = new Intent(CadastroeventoActivity.this,FeedeventActivity.class);
-                startActivity(i);
-
-
-
-
-
-
-
+                myRef.push().setValue(c);
+                finish();
             }
         });
     }
 
-    public List<Evento> recuperaLista() {
-
-        database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Eventos");
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                eventos.clear();
-                for(DataSnapshot snap : dataSnapshot.getChildren()){
-                    Evento a =snap.getValue(Evento.class);
-                    Log.d("Evento",a.toString());
-                    eventos.add(a);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-        return eventos;
-    }
 
     private void alert(String s) {
         Toast.makeText(this,s,Toast.LENGTH_SHORT).show();

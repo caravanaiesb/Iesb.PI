@@ -37,8 +37,13 @@ public class FeedeventActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.feedevent);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+
         database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Eventos");
         myRef.addValueEventListener(new ValueEventListener() {
@@ -50,7 +55,7 @@ public class FeedeventActivity extends AppCompatActivity {
                     Log.d("Eventos",a.toString());
                     eventosLista.add(a);
                 }
-                eventAdapter.notifyDataSetChanged();
+
             }
 
             @Override
@@ -58,13 +63,13 @@ public class FeedeventActivity extends AppCompatActivity {
 
             }
         });
-        setSupportActionBar(toolbar);
-        listaDados = (RecyclerView) findViewById(R.id.listaDados);
 
+        listaDados = (RecyclerView) findViewById(R.id.listaDados);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         listaDados.setLayoutManager(linearLayoutManager);
         eventAdapter = new EventAdapter(eventosLista);
         listaDados.setAdapter(eventAdapter);
+        eventAdapter.notifyDataSetChanged();
     }
 
 

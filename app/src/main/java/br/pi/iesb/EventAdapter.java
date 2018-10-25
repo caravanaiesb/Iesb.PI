@@ -1,74 +1,82 @@
 package br.pi.iesb;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolderEvento> {
+public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolderEvent> {
 
-    private List<Evento> dados = new ArrayList<>();
-
+    private List<Evento> dados;
 
     public EventAdapter(List<Evento> dados){
-        this.dados=dados;
+        this.dados= dados;
     }
+
 
     @NonNull
     @Override
-    public EventAdapter.ViewHolderEvento onCreateViewHolder(ViewGroup viewGroup, int i) {
-        LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
+    public EventAdapter.ViewHolderEvent onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = layoutInflater.inflate(R.layout.linha_event,viewGroup,false);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
 
-        ViewHolderEvento viewHolderEvento = new ViewHolderEvento(view);
+        View view = layoutInflater.inflate(R.layout.linha_event,parent,false);
 
-        return viewHolderEvento;
+        ViewHolderEvent holderEvent = new ViewHolderEvent(view);
+
+        return holderEvent;
     }
 
     @Override
-    public void onBindViewHolder(EventAdapter.ViewHolderEvento viewHolder, int i) {
-
-        if((dados!=null) && (dados.size() >0)) {
-            Evento evento = new Evento();
-            evento= dados.get(i);
-            if(evento==dados.get(i)){
-           /* viewHolder.txtListEvent.setText(evento.txtNomeEvento);
-            viewHolder.txtListDescEvent.setText(evento.txtTipoEvento);
-            viewHolder.txtListAtracao.setText(evento.txtAtracaoPrincipal);*/
+    public void onBindViewHolder(@NonNull EventAdapter.ViewHolderEvent holder, int position) {
+        if((dados!=null) && (dados.size()>0)) {
+            if(holder!=null){
+            holder.txtNome.setText("NOMAI");
+            holder.txtDescricao.setText("DESC");
+            holder.txtAtracao.setText("Atracao");
         }}
+
+
     }
 
     @Override
     public int getItemCount() {
-
         return dados.size();
     }
 
-    public class ViewHolderEvento extends RecyclerView.ViewHolder{
+    public class ViewHolderEvent extends RecyclerView.ViewHolder{
 
-        public TextView txtListEvent,txtListDescEvent,txtListAtracao;
-        public ImageView imgListEvent;
+        public TextView txtNome;
+        public TextView txtDescricao;
+        public TextView txtAtracao;
 
-        public ViewHolderEvento(@NonNull View itemView) {
+
+
+
+
+
+        public ViewHolderEvent(@NonNull View itemView) {
             super(itemView);
-            imgListEvent = itemView.findViewById(R.id.imgListEvent);
-            txtListEvent = itemView.findViewById(R.id.txtNomeEvento);
-            txtListDescEvent = itemView.findViewById(R.id.txtTipoEvento);
-            txtListAtracao = itemView.findViewById(R.id.txtAtracaoPrincipal);
+
+            txtNome = (TextView)itemView.findViewById(R.id.txtNomeEvento);
+            txtDescricao = (TextView)itemView.findViewById(R.id.txtTipoEvento);
+            txtAtracao = (TextView)itemView.findViewById(R.id.txtAtracaoPrincipal);
 
         }
-
-
-
-
     }
+
+    //public ImageView imgListEvent;
+
+          //  imgListEvent = itemView.findViewById(R.id.imgListEvent);
+            //txtListEvent = itemView.findViewById(R.id.txtNomeEvento);
+            //txtListDescEvent = itemView.findViewById(R.id.txtTipoEvento);
+            //txtListAtracao = itemView.findViewById(R.id.txtAtracaoPrincipal);
+
+
 }
