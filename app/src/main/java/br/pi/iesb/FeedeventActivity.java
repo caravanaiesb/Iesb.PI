@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -27,6 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -41,24 +43,25 @@ public class FeedeventActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private FirebaseRecyclerOptions<Evento> options;
     private FirebaseRecyclerAdapter<Evento,EventRecycleViewHolder> adapter;
+    private EventAdapter eventAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mostrarFeed();
-
-
-
-
 
         setContentView(R.layout.feedevent);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        mostrarFeed();
 
+    }
 
-        database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Eventos");
-        /*myRef.addValueEventListener(new ValueEventListener() {
+    private void mostrarFeed() {
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Eventos");
+
+        eventAdapter = new EventAdapter();
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 eventosLista.clear();
@@ -68,6 +71,7 @@ public class FeedeventActivity extends AppCompatActivity {
                     eventosLista.add(a);
                 }
 
+                eventAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -76,44 +80,10 @@ public class FeedeventActivity extends AppCompatActivity {
             }
         });
 
-        listaDados = (RecyclerView) findViewById(R.id.listaDados);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        listaDados.setLayoutManager(linearLayoutManager);
-        eventAdapter = new EventAdapter(eventosLista);
-        listaDados.setAdapter(eventAdapter);
-        eventAdapter.notifyDataSetChanged();
-        */
-    }
-
-    private void mostrarFeed() {
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Eventos");
-        options = new FirebaseRecyclerOptions.Builder<Evento>()
-                .setQuery(databaseReference,Evento.class)
-                .build();
-
-        adapter = new FirebaseRecyclerAdapter<Evento, EventRecycleViewHolder>(options) {
-                    @Override
-                    protected void onBindViewHolder(@NonNull EventRecycleViewHolder holder, int position, @NonNull Evento model) {
-                        Toast.makeText(FeedeventActivity.this,"AQUI",Toast.LENGTH_SHORT).show();
-                        holder.txtNomeEvent.setText(model.getTxtNomeEvento());
-                        holder.txtDescDescEvent.setText(model.getTxtTipoEvento());
-                        holder.txtAtracao.setText(model.getTxtAtracaoPrincipal());
-                    }
-
-                    @NonNull
-                    @Override
-                    public EventRecycleViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                        View itemView = LayoutInflater.from(getBaseContext()).inflate(R.layout.linha_event,viewGroup,false);
-
-
-                        return new EventRecycleViewHolder(itemView);
-                    }
-                };
-        adapter.startListening();
         recyclerView = (RecyclerView) findViewById(R.id.recycleView);
-        recyclerView.setAdapter(adapter);
-
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(eventAdapter);
     }
 
 
@@ -137,5 +107,26 @@ public class FeedeventActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private class EventAdapter extends RecyclerView.Adapter<EventRecycleViewHolder> {
+
+        @Override
+        public EventRecycleViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            View itemView = LayoutInflater.from(getBaseContext()).inflate(R.layout.linha_event,viewGroup,false);
+            return new EventRecycleViewHolder(itemView);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull EventRecycleViewHolder holder, int i) {
+            Evento model = eventosLista.get(i);
+            holder.txtNomeEvent.setText(model.getTxtNomeEvento());
+            holder.txtDescEvent.setText(model.getTxtTipoEvento());
+            holder.txtAtracao.setText(model.getTxtAtracaoPrincipal());
+        }
+
+        @Override
+        public int getItemCount() {
+            return eventosLista.size();
+        }
+    }
 
 }

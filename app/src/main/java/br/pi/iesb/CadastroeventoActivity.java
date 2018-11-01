@@ -45,7 +45,6 @@ public class CadastroeventoActivity extends AppCompatActivity {
 
         eventosClicks();
     }
-
     private void eventosClicks() {
         btnCancelarEvent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,9 +59,7 @@ public class CadastroeventoActivity extends AppCompatActivity {
 
             }
         });
-
     }
-
 
     private void cadastraEvento() {
         Evento c = new Evento(txtNomeEvento.getText().toString(),txtTipoEvento.getText().toString(),txtDataEvento.getText().toString(),txtAtracaoPrincipal.getText().toString());
@@ -70,14 +67,9 @@ public class CadastroeventoActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Eventos");
         myRef.push().setValue(c);
-        adapter.notifyDataSetChanged();
-
-
-
         finish();
 
     }
-
 
     private void alert(String s) {
         Toast.makeText(this,s,Toast.LENGTH_SHORT).show();
