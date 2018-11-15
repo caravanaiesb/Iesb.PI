@@ -35,6 +35,13 @@
     <string name="cadastrar">Cadastrar</string>
     <string name="cancelar">Cancelar</string>
     <string name="descri_o_do_evento">Descrição do evento</string>
+    <string name="passageiro">Passageiro</string>
+    <string name="motorista">Motorista</string>
+    <string name="selecione_o_seu_tipo_de_usu_rio">Selecione o seu tipo de usuário:</string>
+    <string name="placa_do_veiculo">Placa do Veiculo</string>
+    <string name="veiculo">Veiculo</string>
+    <string name="vagas_do_veiculo">Vagas do Veiculo</string>
+    <string name="nomeMotorista">Nome</string>
 
 
 </resources>

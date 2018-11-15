@@ -2,7 +2,9 @@ package br.pi.iesb;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.maps.GoogleMap;
@@ -97,8 +100,6 @@ public class FeedeventActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_CadastrarEvento) {
             Intent i = new Intent(FeedeventActivity.this,CadastroeventoActivity.class);
             startActivity(i);
@@ -106,6 +107,8 @@ public class FeedeventActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
     private class EventAdapter extends RecyclerView.Adapter<EventRecycleViewHolder> {
 
@@ -118,6 +121,7 @@ public class FeedeventActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull EventRecycleViewHolder holder, int i) {
             Evento model = eventosLista.get(i);
+            Glide.with(FeedeventActivity.this).load(R.mipmap.ic_launcher).into(holder.circleImg);
             holder.txtNomeEvent.setText(model.getTxtNomeEvento());
             holder.txtDescEvent.setText(model.getTxtTipoEvento());
             holder.txtAtracao.setText(model.getTxtAtracaoPrincipal());
@@ -128,5 +132,7 @@ public class FeedeventActivity extends AppCompatActivity {
             return eventosLista.size();
         }
     }
+
+
 
 }

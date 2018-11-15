@@ -19,6 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +29,8 @@ public class CadastroeventoActivity extends AppCompatActivity {
     private EditText txtDataEvento,txtNomeEvento,txtTipoEvento,txtAtracaoPrincipal;
     private Button btnCancelarEvent,btnCadastrarEvent;
     private FirebaseDatabase database;
-    private List<Evento> eventos = new ArrayList<>();
-    private List<Evento> listaRecuperada = new ArrayList<>();
-    private DatabaseReference databaseReference;
-    private FirebaseDatabase firebaseDatabase;
-    private FirebaseRecyclerAdapter<Evento,EventRecycleViewHolder> adapter;
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    private StorageReference storageRef = storage.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +39,8 @@ public class CadastroeventoActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         inicializaComponentes();
-        database=FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Eventos");
-
         eventosClicks();
+        StorageReference imagesRef = storageRef.child("images");
     }
     private void eventosClicks() {
         btnCancelarEvent.setOnClickListener(new View.OnClickListener() {

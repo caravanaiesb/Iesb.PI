@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CadastroMotorista">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="216dp"
+            android:layout_height="129dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/bus"
+            app:layout_constraintBottom_toTopOf="@+id/edtNomeMotorista"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <EditText
+            android:id="@+id/edtNomeMotorista"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            android:autofillHints="@string/nome"
+            android:hint="@string/nomeMotorista"
+            android:inputType="text"
+            app:layout_constraintBottom_toTopOf="@+id/edtEmailMotorista"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:targetApi="o" />
+
+        <EditText
+            android:id="@+id/edtEmailMotorista"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:autofillHints="@string/email"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            app:layout_constraintBottom_toTopOf="@+id/edtSenhaMotorista"
+            app:layout_constraintEnd_toEndOf="@+id/edtNomeMotorista"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/edtNomeMotorista"
+            tools:ignore="MissingConstraints"
+            tools:targetApi="o" />
+
+        <EditText
+            android:id="@+id/edtSenhaMotorista"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:autofillHints="@string/Senha"
+            android:hint="@string/Senha"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toTopOf="@+id/edtVeiculo"
+            app:layout_constraintEnd_toEndOf="@+id/edtEmailMotorista"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/edtEmailMotorista"
+            tools:ignore="MissingConstraints"
+            tools:targetApi="o" />
+
+        <EditText
+            android:id="@+id/edtPlacaVeiculo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:autofillHints="@string/placa_do_veiculo"
+            android:hint="@string/placa_do_veiculo"
+            android:inputType="text"
+            app:layout_constraintBottom_toTopOf="@+id/edtVagasVeiculo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/edtVeiculo"
+            tools:ignore="MissingConstraints"
+            tools:targetApi="o" />
+
+        <EditText
+            android:id="@+id/edtVeiculo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:autofillHints="@string/veiculo"
+            android:hint="@string/veiculo"
+            android:inputType="text"
+            app:layout_constraintBottom_toTopOf="@+id/edtPlacaVeiculo"
+            app:layout_constraintEnd_toEndOf="@+id/edtSenhaMotorista"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/edtSenhaMotorista"
+            tools:ignore="MissingConstraints"
+            tools:targetApi="o" />
+
+        <EditText
+            android:id="@+id/edtVagasVeiculo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:autofillHints="@string/vagas_do_veiculo"
+            android:hint="@string/vagas_do_veiculo"
+            android:inputType="number"
+            app:layout_constraintBottom_toTopOf="@+id/btnRegistrarMotorista"
+            app:layout_constraintEnd_toEndOf="@+id/edtPlacaVeiculo"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/edtPlacaVeiculo"
+            tools:ignore="UnusedAttribute" />
+
+        <Button
+            android:id="@+id/btnCancelarRegistroMotorista"
+            android:layout_width="171dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/cancelar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/edtVagasVeiculo"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/btnRegistrarMotorista" />
+
+        <Button
+            android:id="@+id/btnRegistrarMotorista"
+            android:layout_width="171dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/registrar_se"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/edtVagasVeiculo" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="503dp" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

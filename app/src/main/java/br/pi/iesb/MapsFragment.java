@@ -43,21 +43,13 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         super.onCreate(savedInstanceState);
         getMapAsync(this);
 
+
     }
 
     @SuppressLint("MissingPermission")
     @Override
     public void onResume() {
         super.onResume();
-        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,this);
-        Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-        LatLng userLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
-        MarkerOptions marker = new MarkerOptions();
-        marker.position(userLocation);
-        marker.title("Aqui O");
-
 
     }
 
@@ -102,6 +94,17 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                 Log.e("MapsFragment", "Can't find style. Error: ", e);
             }
             Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if(lastKnownLocation==null){
+                Location loc = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+                LatLng userLocation = new LatLng(loc.getLatitude(), loc.getLongitude());
+                MarkerOptions marker = new MarkerOptions();
+                marker.position(userLocation);
+                marker.title("Aqui O");
+                LatLng latLng = new LatLng(userLocation.latitude, userLocation.longitude);
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15);
+                mMap.animateCamera(cameraUpdate);
+                }else{
+
 
             LatLng userLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
             MarkerOptions marker = new MarkerOptions();
@@ -114,7 +117,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             LatLng latLng = new LatLng(userLocation.latitude, userLocation.longitude);
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15);
             mMap.animateCamera(cameraUpdate);
-        }
+        }}
         catch (SecurityException ex)
         {
             Log.e(TAG, "Error", ex);

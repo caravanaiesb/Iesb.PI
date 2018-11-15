@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 Intent i= new Intent(getApplicationContext(),RegistroActivity.class);
+                 Intent i= new Intent(getApplicationContext(),SelecionaCadastroActivity.class);
                  startActivity(i);
             }
         });
