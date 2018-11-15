@@ -13,12 +13,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class CadastroMotorista extends AppCompatActivity {
 
-    private EditText nomeMotorista,emailMotorista,senhaMotorista,veiculo,edtPlaca,edtVagasVeiculo;
+    private EditText nomeMotorista,emailMotorista,senhaMotorista,edtVeiculo,edtPlaca,edtVagasVeiculo;
     private Button btnRegistrarMotorista,btnCancelarRegistroMotorista;
-    FirebaseAuth auth;
+    private FirebaseAuth auth;
+    private FirebaseDatabase database;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +38,7 @@ public class CadastroMotorista extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!nomeMotorista.getText().toString().equals("") && !senhaMotorista.getText().toString().equals("")) {
-                    if(!emailMotorista.getText().toString().equals("") && !veiculo.getText().toString().equals("")) {
+                    if(!emailMotorista.getText().toString().equals("") && !edtVeiculo.getText().toString().equals("")) {
                         if(!edtPlaca.getText().toString().equals("") && !edtVagasVeiculo.getText().toString().equals("")){
                             String email = emailMotorista.getText().toString().trim();
                             String nome = nomeMotorista.getText().toString().trim();
@@ -72,7 +76,7 @@ public class CadastroMotorista extends AppCompatActivity {
                         if(task.isSuccessful()){
                             alert("Cadastrado com sucesso!");
                             cadastrarRealtime();
-                            Intent i = new Intent(CadastroMotorista.this,PrincipalActivity.class);
+                            Intent i = new Intent(CadastroMotorista.this,MenuActivity.class);
                             startActivity(i);
                             finish();
                         }
@@ -88,12 +92,12 @@ public class CadastroMotorista extends AppCompatActivity {
     }
 
     private void cadastrarRealtime() {
-        String email = emailMotorista.getText().toString().trim();
-        String nome = nomeMotorista.getText().toString().trim();
-        String senha = senhaMotorista.getText().toString().trim();
-        String veiculo = edtVagasVeiculo.getText().toString().trim();
-        String placa = edtPlaca.getText().toString().trim();
-        Integer vagas = Integer.valueOf(edtVagasVeiculo.getText().toString().trim());
+
+        Motorista x = new Motorista(nomeMotorista.getText().toString(),senhaMotorista.getText().toString(),emailMotorista.getText().toString(),edtVeiculo.getText().toString(),edtPlaca.getText().toString(),Integer.valueOf(edtVagasVeiculo.getText().toString()));
+
+        database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Motoristas");
+        myRef.push().setValue(x);
 
 
     }
@@ -106,7 +110,7 @@ public class CadastroMotorista extends AppCompatActivity {
         nomeMotorista = (EditText) findViewById(R.id.edtNomeMotorista);
         emailMotorista = (EditText) findViewById(R.id.edtEmailMotorista);
         senhaMotorista = (EditText) findViewById(R.id.edtSenhaMotorista);
-        veiculo = (EditText) findViewById(R.id.edtVeiculo);
+        edtVeiculo = (EditText) findViewById(R.id.edtVeiculo);
         edtPlaca = (EditText) findViewById(R.id.edtPlacaVeiculo);
         edtVagasVeiculo = (EditText) findViewById(R.id.edtVagasVeiculo);
         btnRegistrarMotorista =(Button) findViewById(R.id.btnRegistrarMotorista);

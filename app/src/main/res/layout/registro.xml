@@ -58,33 +58,48 @@
         tools:ignore="MissingConstraints"
         tools:targetApi="o" />
 
-    <Button
-        android:id="@+id/btnRegistrarse"
+    <EditText
+        android:id="@+id/edtIdade"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="20dp"
-        android:hint="@string/registrar_se"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:autofillHints="Idade"
+        android:hint="@string/idade"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtSenha"
+        tools:ignore="MissingConstraints"
+        tools:targetApi="o" />
+
+    <Button
+        android:id="@+id/btnRegistrarse"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/registrar_se"
+        app:layout_constraintEnd_toStartOf="@+id/btnVoltar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtIdade"
         tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/btnVoltar"
-        android:layout_width="match_parent"
+        android:layout_width="171dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="108dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:hint="@string/voltar"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegistrarse"
+        app:layout_constraintStart_toEndOf="@+id/btnRegistrarse"
+        app:layout_constraintTop_toBottomOf="@+id/edtIdade"
         tools:ignore="HardcodedText" />
 
     <android.support.constraint.Guideline

@@ -42,6 +42,7 @@
     <string name="veiculo">Veiculo</string>
     <string name="vagas_do_veiculo">Vagas do Veiculo</string>
     <string name="nomeMotorista">Nome</string>
+    <string name="idade">Idade</string>
 
 
 </resources>
