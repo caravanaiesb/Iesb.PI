@@ -16,6 +16,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/nome_do_evento"
+        android:textColor="@color/com_facebook_button_background_color_focused"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,14 +25,15 @@
     <EditText
         android:id="@+id/txtNomeEvento"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:autofillHints="@string/nome_do_evento"
+        android:background="@color/com_facebook_button_background_color_focused"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="@string/nome_do_evento"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        android:autofillHints="@string/nome_do_evento"
         tools:ignore="LabelFor,UnusedAttribute" />
 
     <TextView
@@ -40,6 +43,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/tipo_de_evento"
+        android:textColor="@color/com_facebook_button_background_color_focused"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/txtNomeEvento"
         app:layout_constraintStart_toStartOf="@+id/txtNomeEvento"
         app:layout_constraintTop_toBottomOf="@+id/txtNomeEvento" />
@@ -47,10 +52,11 @@
     <EditText
         android:id="@+id/txtTipoEvento"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:background="@color/com_facebook_button_background_color_focused"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="@string/tipo_de_evento"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/textView3"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
@@ -59,7 +65,8 @@
     <EditText
         android:id="@+id/txtDataEvento"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:background="@color/com_facebook_button_background_color_focused"
         android:ems="10"
         android:hint="@string/date_event"
         android:inputType="date"
@@ -74,6 +81,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/data_do_evento"
+        android:textColor="@color/com_facebook_button_background_color_focused"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/txtTipoEvento"
         app:layout_constraintStart_toStartOf="@+id/txtTipoEvento"
         app:layout_constraintTop_toBottomOf="@+id/txtTipoEvento" />
@@ -84,6 +93,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/atracao_principal"
+        android:textColor="@color/com_facebook_button_background_color_focused"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/txtDataEvento"
         app:layout_constraintStart_toStartOf="@+id/txtDataEvento"
         app:layout_constraintTop_toBottomOf="@+id/txtDataEvento" />
@@ -91,14 +102,15 @@
     <EditText
         android:id="@+id/txtAtracaoPrincipal"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:autofillHints="@string/atracao_principal"
+        android:background="@color/com_facebook_button_background_color_focused"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="@string/atracao_principal"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/textView5"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
-        android:autofillHints="@string/atracao_principal"
         tools:ignore="UnusedAttribute" />
 
     <Button
@@ -109,6 +121,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/cadastrar"
+        android:background="@color/common_google_signin_btn_text_dark_focused"
+        android:textColorHint="@color/com_facebook_button_background_color_focused"
+        android:textColor="@color/com_facebook_button_background_color_focused"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/txtAtracaoPrincipal"
         app:layout_constraintTop_toBottomOf="@+id/txtAtracaoPrincipal" />
@@ -121,6 +137,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/cancelar"
+        android:background="@color/common_google_signin_btn_text_dark_focused"
+        android:textColorHint="@color/com_facebook_button_background_color_focused"
+        android:textColor="@color/com_facebook_button_background_color_focused"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/txtAtracaoPrincipal"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toBottomOf="@+id/txtAtracaoPrincipal" />

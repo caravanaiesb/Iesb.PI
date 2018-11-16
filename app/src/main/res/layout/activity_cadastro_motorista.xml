@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/nightback"
+    android:orientation="vertical">
+
+
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,150 +21,172 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="216dp"
-            android:layout_height="129dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/bus"
-            app:layout_constraintBottom_toTopOf="@+id/edtNomeMotorista"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
-
         <EditText
             android:id="@+id/edtNomeMotorista"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
             android:autofillHints="@string/nome"
+            android:background="@color/com_facebook_button_background_color_focused"
             android:hint="@string/nomeMotorista"
             android:inputType="text"
-            app:layout_constraintBottom_toTopOf="@+id/edtEmailMotorista"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7"
             tools:ignore="MissingConstraints"
             tools:targetApi="o" />
 
         <EditText
             android:id="@+id/edtEmailMotorista"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:autofillHints="@string/email"
+            android:background="@color/com_facebook_button_background_color_focused"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
-            app:layout_constraintBottom_toTopOf="@+id/edtSenhaMotorista"
             app:layout_constraintEnd_toEndOf="@+id/edtNomeMotorista"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/edtNomeMotorista"
+            app:layout_constraintTop_toBottomOf="@+id/edtNomeMotorista"
             tools:ignore="MissingConstraints"
             tools:targetApi="o" />
 
         <EditText
             android:id="@+id/edtSenhaMotorista"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:autofillHints="@string/Senha"
+            android:background="@color/com_facebook_button_background_color_focused"
             android:hint="@string/Senha"
             android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@+id/edtVeiculo"
             app:layout_constraintEnd_toEndOf="@+id/edtEmailMotorista"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/edtEmailMotorista"
+            app:layout_constraintTop_toBottomOf="@+id/edtEmailMotorista"
             tools:ignore="MissingConstraints"
             tools:targetApi="o" />
 
         <EditText
             android:id="@+id/edtPlacaVeiculo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:autofillHints="@string/placa_do_veiculo"
+            android:background="@color/com_facebook_button_background_color_focused"
             android:hint="@string/placa_do_veiculo"
             android:inputType="text"
-            app:layout_constraintBottom_toTopOf="@+id/edtVagasVeiculo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/edtVeiculo"
+            app:layout_constraintTop_toBottomOf="@+id/edtVeiculo"
             tools:ignore="MissingConstraints"
             tools:targetApi="o" />
 
         <EditText
             android:id="@+id/edtVeiculo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:autofillHints="@string/veiculo"
+            android:background="@color/com_facebook_button_background_color_focused"
             android:hint="@string/veiculo"
             android:inputType="text"
-            app:layout_constraintBottom_toTopOf="@+id/edtPlacaVeiculo"
             app:layout_constraintEnd_toEndOf="@+id/edtSenhaMotorista"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/edtSenhaMotorista"
+            app:layout_constraintTop_toBottomOf="@+id/edtSenhaMotorista"
             tools:ignore="MissingConstraints"
             tools:targetApi="o" />
 
         <EditText
             android:id="@+id/edtVagasVeiculo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:ems="10"
             android:autofillHints="@string/vagas_do_veiculo"
+            android:background="@color/com_facebook_button_background_color_focused"
+            android:ems="10"
             android:hint="@string/vagas_do_veiculo"
             android:inputType="number"
-            app:layout_constraintBottom_toTopOf="@+id/btnRegistrarMotorista"
             app:layout_constraintEnd_toEndOf="@+id/edtPlacaVeiculo"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/edtPlacaVeiculo"
+            app:layout_constraintTop_toBottomOf="@+id/edtPlacaVeiculo"
             tools:ignore="UnusedAttribute" />
 
         <Button
             android:id="@+id/btnCancelarRegistroMotorista"
-            android:layout_width="171dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:background="@color/common_google_signin_btn_text_dark_focused"
             android:text="@string/cancelar"
+            android:textColor="@color/com_facebook_button_background_color_focused"
+            android:textColorHint="@color/com_facebook_button_background_color_focused"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/edtVagasVeiculo"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/btnRegistrarMotorista" />
+            app:layout_constraintStart_toStartOf="@+id/guideline13"
+            app:layout_constraintTop_toBottomOf="@+id/edtVagasVeiculo" />
 
         <Button
             android:id="@+id/btnRegistrarMotorista"
-            android:layout_width="171dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:background="@color/common_google_signin_btn_text_dark_focused"
             android:text="@string/registrar_se"
+            android:textColor="@color/com_facebook_button_background_color_focused"
+            android:textColorHint="@color/com_facebook_button_background_color_focused"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/edtVagasVeiculo" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline13"
+            app:layout_constraintStart_toStartOf="@+id/edtVagasVeiculo"
+            app:layout_constraintTop_toBottomOf="@+id/edtVagasVeiculo" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline10"
+        <TextView
+            android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="503dp" />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="8dp"
+            android:text="Registro de Motorista"
+            android:textColor="@color/com_facebook_button_background_color_focused"
+            android:textColorHint="@color/com_facebook_button_background_color_focused"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
+</LinearLayout>
