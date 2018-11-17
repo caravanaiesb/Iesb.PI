@@ -96,8 +96,13 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         ivEmail.setText(firebaseUser.getEmail());
         ivID.setText(firebaseUser.getUid());
 
+
+        String txtNome=getIntent().getStringExtra("key");
+
+
+
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference ref = storage.getReference().child("Eventos/suywui");
+        StorageReference ref = storage.getReference().child("Eventos/"+txtNome);
 
         final long FIVE_MEGABYTE = 5120 * 1024;
         ref.getBytes(FIVE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {

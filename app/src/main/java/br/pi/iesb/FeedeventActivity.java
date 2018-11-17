@@ -53,7 +53,6 @@ public class FeedeventActivity extends AppCompatActivity {
     private List<Evento> eventosLista = new ArrayList<>();
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
-    private Uri filePath;
     private FirebaseRecyclerAdapter<Evento,EventRecycleViewHolder> adapter;
     private EventAdapter eventAdapter;
 
@@ -119,7 +118,7 @@ public class FeedeventActivity extends AppCompatActivity {
 
 
 
-    private class EventAdapter extends RecyclerView.Adapter<EventRecycleViewHolder> {
+    public class EventAdapter extends RecyclerView.Adapter<EventRecycleViewHolder> {
 
         @Override
         public EventRecycleViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -131,8 +130,8 @@ public class FeedeventActivity extends AppCompatActivity {
         public void onBindViewHolder(@NonNull final EventRecycleViewHolder holder, int i) {
 
             FirebaseStorage storage = FirebaseStorage.getInstance();
-            Evento model = eventosLista.get(i);
-            StorageReference ref = storage.getReference().child("Eventos/"+model.getTxtNomeEvento());
+            final Evento model = eventosLista.get(i);
+            StorageReference ref = storage.getReference().child("Eventos/" + model.getTxtNomeEvento());
 
             final long FIVE_MEGABYTE = 5120 * 1024;
             ref.getBytes(FIVE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
@@ -151,14 +150,23 @@ public class FeedeventActivity extends AppCompatActivity {
             holder.txtNomeEvent.setText(model.getTxtNomeEvento());
             holder.txtDescEvent.setText(model.getTxtTipoEvento());
             holder.txtAtracao.setText(model.getTxtAtracaoPrincipal());
-        }
 
+            holder.itemView.setTag(i);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int clickPosition = (int) view.getTag();
+                    Intent z = new Intent(FeedeventActivity.this,EventDetails.class);
+                    z.putExtra("key",model.getTxtNomeEvento());
+                    startActivity(z);
+
+                    Toast.makeText(FeedeventActivity.this, "posicao " + clickPosition, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
         @Override
         public int getItemCount() {
             return eventosLista.size();
         }
+        }
     }
-
-
-
-}
