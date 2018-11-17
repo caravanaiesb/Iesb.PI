@@ -6,20 +6,32 @@ import android.support.annotation.NonNull;
 import android.support.constraint.solver.widgets.Rectangle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventDetails extends AppCompatActivity {
     private ImageView imgEvento;
-    private TextView nomeEventView;
+    private TextView nomeEventView,descricaoEvento,atracaoEvento,dataEvento;
+    private DatabaseReference databaseReference;
+    private FirebaseDatabase firebaseDatabase;
+    private List<Evento> eventosLista = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,61 +41,81 @@ public class EventDetails extends AppCompatActivity {
     }
 
     private void exibirDados() {
-        String txtNome=getIntent().getStringExtra("key");
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference ref = storage.getReference().child("Eventos/"+txtNome);
-
-        final long FIVE_MEGABYTE = 5120 * 1024;
-        ref.getBytes(FIVE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Eventos");
+        final String posicao = getIntent().getStringExtra("key");
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onSuccess(byte[] bytes) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                eventosLista.clear();
+                for(DataSnapshot snap : dataSnapshot.getChildren()){
+                    Evento a =snap.getValue(Evento.class);
+                    Log.d("Eventos",a.toString());
+                    eventosLista.add(a);
+                }
+                if ( eventosLista == null){
 
-                int newWidth= 369;
-                int newHeight= 144;
-                    // PNG has not losses, it just ignores this field when compressing
-                    final int COMPRESS_QUALITY = 0;
+                }else
+                {
+                    Evento x = eventosLista.get(Integer.parseInt(posicao));
+                    nomeEventView.setText(x.getTxtNomeEvento());
+                    descricaoEvento.setText(x.getTxtTipoEvento());
+                    dataEvento.setText(x.getTxtDataEvento());
+                    atracaoEvento.setText(x.getTxtAtracaoPrincipal());
 
-                    // Get the bitmap from byte array since, the bitmap has the the resize function
-                    Bitmap bitmapImage = (BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
-
-                    // New bitmap with the correct size, may not return a null object
-                    Bitmap mutableBitmapImage = Bitmap.createScaledBitmap(bitmapImage,newWidth, newHeight, false);
-
-                    // Get the byte array from tbe bitmap to be returned
-                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                    mutableBitmapImage.compress(Bitmap.CompressFormat.PNG, 0 , outputStream);
-
-                    if (mutableBitmapImage != bitmapImage) {
-                        mutableBitmapImage.recycle();
-                    } // else they are the same, just recycle once
-
-                    bitmapImage.recycle();
-
-                    Glide.with(EventDetails.this).load(outputStream.toByteArray()).into(imgEvento);
+                    FirebaseStorage storage = FirebaseStorage.getInstance();
+                    StorageReference ref = storage.getReference().child("Eventos/"+x.getTxtNomeEvento() );
 
 
 
+                    final long FIVE_MEGABYTE = 5120 * 1024;
+                    ref.getBytes(FIVE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                        @Override
+                        public void onSuccess(byte[] bytes) {
+                            int newWidth= imgEvento.getWidth();
+                            int newHeight= imgEvento.getHeight();
+                            final int COMPRESS_QUALITY = 0;
 
-                // Data for "images/island.jpg" is returns, use this as needed
+                            Bitmap bitmapImage = (BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
 
-                Glide.with(EventDetails.this).load(bytes).into(imgEvento);
+                            Bitmap mutableBitmapImage = Bitmap.createScaledBitmap(bitmapImage,newWidth, newHeight, false);
+
+                            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                            mutableBitmapImage.compress(Bitmap.CompressFormat.PNG, 0 , outputStream);
+
+                            if (mutableBitmapImage != bitmapImage) {
+                                mutableBitmapImage.recycle();
+                            }
+                            bitmapImage.recycle();
+                            Glide.with(EventDetails.this).load(outputStream.toByteArray()).into(imgEvento);
+
+                            // Data for "images/island.jpg" is returns, use this as needed
+
+                            Glide.with(EventDetails.this).load(bytes).into(imgEvento);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle any errors
+                        }
+                    });
+                }
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
+
+                @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
-
-        nomeEventView.setText(txtNome);
-
-
 
     }
 
     private void inicializaComponentes() {
         nomeEventView = (TextView) findViewById(R.id.nomeEventView);
         imgEvento = (ImageView) findViewById(R.id.imgEvento);
+        dataEvento = (TextView) findViewById(R.id.dataEvento);
+        descricaoEvento = (TextView) findViewById(R.id.tipoEvento);
+        atracaoEvento = (TextView) findViewById(R.id.atracaoEvento);
 
 
     }

@@ -137,7 +137,6 @@ public class FeedeventActivity extends AppCompatActivity {
             ref.getBytes(FIVE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                 @Override
                 public void onSuccess(byte[] bytes) {
-                    // Data for "images/island.jpg" is returns, use this as needed
                     Glide.with(FeedeventActivity.this).load(bytes).into(holder.circleImg);
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -157,7 +156,8 @@ public class FeedeventActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     int clickPosition = (int) view.getTag();
                     Intent z = new Intent(FeedeventActivity.this,EventDetails.class);
-                    z.putExtra("key",model.getTxtNomeEvento());
+                    String clickposi = String.valueOf(clickPosition);
+                    z.putExtra("key",clickposi);
                     startActivity(z);
 
                     Toast.makeText(FeedeventActivity.this, "posicao " + clickPosition, Toast.LENGTH_SHORT).show();
