@@ -24,6 +24,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
     private ImageView ivFoto;
     private TextView ivEmail,ivID;
     private Button btnSignOut;
+    private ImageView img;
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser firebaseUser;
@@ -99,7 +100,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         ivEmail = (TextView) findViewById(R.id.ivEmail);
         ivID = (TextView) findViewById(R.id.ivId);
         btnSignOut = (Button) findViewById(R.id.btnSignOut);
-
+        img = (ImageView) findViewById(R.id.imageView);
     }
 
     @Override

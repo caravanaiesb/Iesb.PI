@@ -69,7 +69,7 @@
         android:background="@color/com_facebook_button_background_color_focused"
         android:ems="10"
         android:hint="@string/date_event"
-        android:inputType="date"
+        android:inputType="datetime"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
@@ -114,20 +114,37 @@
         tools:ignore="UnusedAttribute" />
 
     <Button
+        android:id="@+id/btnCarregarImg"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/google_buttons"
+        android:text="Carregar imagem"
+        android:textColor="@color/com_facebook_button_background_color_focused"
+        android:textColorHint="@color/com_facebook_button_background_color_focused"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAtracaoPrincipal" />
+
+    <Button
         android:id="@+id/btnCadastrarEvent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/cadastrar"
         android:background="@color/common_google_signin_btn_text_dark_focused"
-        android:textColorHint="@color/com_facebook_button_background_color_focused"
+        android:text="@string/cadastrar"
         android:textColor="@color/com_facebook_button_background_color_focused"
+        android:textColorHint="@color/com_facebook_button_background_color_focused"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/txtAtracaoPrincipal"
-        app:layout_constraintTop_toBottomOf="@+id/txtAtracaoPrincipal" />
+        app:layout_constraintTop_toBottomOf="@+id/btnCarregarImg" />
 
     <Button
         android:id="@+id/btnCancelarEvent"
@@ -136,14 +153,15 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/cancelar"
         android:background="@color/common_google_signin_btn_text_dark_focused"
-        android:textColorHint="@color/com_facebook_button_background_color_focused"
+        android:text="@string/cancelar"
         android:textColor="@color/com_facebook_button_background_color_focused"
+        android:textColorHint="@color/com_facebook_button_background_color_focused"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/txtAtracaoPrincipal"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/txtAtracaoPrincipal" />
+        app:layout_constraintTop_toBottomOf="@+id/btnCarregarImg" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline7"
@@ -151,6 +169,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
+
+    <ImageView
+        android:id="@+id/imgPreview"
+        android:layout_width="110dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCancelarEvent" />
 
 
 </android.support.constraint.ConstraintLayout>
