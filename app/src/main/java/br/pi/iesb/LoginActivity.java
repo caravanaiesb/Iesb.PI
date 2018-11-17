@@ -196,7 +196,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Intent i =  new Intent(LoginActivity.this,MenuActivity.class);
+                            Intent i =  new Intent(LoginActivity.this,PrincipalActivity.class);
                             startActivity(i);
                         }else{
                             alert("E-mail ou Senha Invalido");

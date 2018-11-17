@@ -38,6 +38,7 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:4.37.0'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.google.firebase:firebase-storage:16.0.1'
+    implementation 'com.firebaseui:firebase-ui-storage:4.1.0'
 
 }
 apply plugin: 'com.google.gms.google-services'

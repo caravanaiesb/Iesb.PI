@@ -2,8 +2,11 @@ package br.pi.iesb;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -23,9 +26,12 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.module.GlideModule;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,7 +39,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +53,7 @@ public class FeedeventActivity extends AppCompatActivity {
     private List<Evento> eventosLista = new ArrayList<>();
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
-    private FirebaseRecyclerOptions<Evento> options;
+    private Uri filePath;
     private FirebaseRecyclerAdapter<Evento,EventRecycleViewHolder> adapter;
     private EventAdapter eventAdapter;
 
@@ -119,9 +128,26 @@ public class FeedeventActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull EventRecycleViewHolder holder, int i) {
+        public void onBindViewHolder(@NonNull final EventRecycleViewHolder holder, int i) {
+
+            FirebaseStorage storage = FirebaseStorage.getInstance();
             Evento model = eventosLista.get(i);
-            Glide.with(FeedeventActivity.this).load(R.mipmap.ic_launcher).into(holder.circleImg);
+            StorageReference ref = storage.getReference().child("Eventos/"+model.getTxtNomeEvento());
+
+            final long FIVE_MEGABYTE = 5120 * 1024;
+            ref.getBytes(FIVE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    // Data for "images/island.jpg" is returns, use this as needed
+                    Glide.with(FeedeventActivity.this).load(bytes).into(holder.circleImg);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle any errors
+                }
+            });
+
             holder.txtNomeEvent.setText(model.getTxtNomeEvento());
             holder.txtDescEvent.setText(model.getTxtTipoEvento());
             holder.txtAtracao.setText(model.getTxtAtracaoPrincipal());

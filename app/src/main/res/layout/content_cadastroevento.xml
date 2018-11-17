@@ -69,7 +69,7 @@
         android:background="@color/com_facebook_button_background_color_focused"
         android:ems="10"
         android:hint="@string/date_event"
-        android:inputType="datetime"
+        android:inputType="date"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
