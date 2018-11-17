@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegistroActivity extends AppCompatActivity {
     private EditText edtEmail, edtSenha, edtNome,edtIdade;
     private Button btnRegistrarse,btnVoltar;
+    private String tipoUsuario;
     private FirebaseAuth auth;
     private FirebaseDatabase database;
     @Override
@@ -73,10 +74,11 @@ public class RegistroActivity extends AppCompatActivity {
 
     private void registrarPassageiroFirebase() {
 
-        Passageiro p = new Passageiro(edtNome.getText().toString(),edtEmail.getText().toString(),edtSenha.getText().toString(),edtIdade.getText().toString());
-
+        Passageiro p = new Passageiro(edtNome.getText().toString(),edtEmail.getText().toString(),edtSenha.getText().toString(),edtIdade.getText().toString(),tipoUsuario="P");
         database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Passageiros");
+        DatabaseReference myRef = database.getReference("Usuarios");
+
+
         myRef.push().setValue(p);
 
     }

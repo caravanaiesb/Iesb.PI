@@ -1,14 +1,22 @@
 package br.pi.iesb;
 
 public class Motorista {
-    private String nomeMotorista,emailMotorista,senhaMotorista,veiculo,placa;
+    private String nomeMotorista,emailMotorista,senhaMotorista,veiculo,placa,tipoUsuario;
     private Integer vagas;
 
     public Motorista(){
 
     }
 
-    public Motorista(String nomeMotorista, String emailMotorista, String senhaMotorista, String veiculo, String placa, Integer vagas){
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public Motorista(String nomeMotorista, String emailMotorista, String senhaMotorista, String veiculo, String placa, Integer vagas, String tipoUsuario){
 
         this.nomeMotorista = nomeMotorista;
         this.emailMotorista = emailMotorista;
@@ -16,6 +24,7 @@ public class Motorista {
         this.veiculo = veiculo;
         this.placa = placa;
         this.vagas = vagas;
+        this.tipoUsuario= tipoUsuario;
 
     }
 

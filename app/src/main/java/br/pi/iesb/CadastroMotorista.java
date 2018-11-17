@@ -20,6 +20,7 @@ public class CadastroMotorista extends AppCompatActivity {
 
     private EditText nomeMotorista,emailMotorista,senhaMotorista,edtVeiculo,edtPlaca,edtVagasVeiculo;
     private Button btnRegistrarMotorista,btnCancelarRegistroMotorista;
+    private String tipoUsuario;
     private FirebaseAuth auth;
     private FirebaseDatabase database;
 
@@ -93,10 +94,10 @@ public class CadastroMotorista extends AppCompatActivity {
 
     private void cadastrarRealtime() {
 
-        Motorista x = new Motorista(nomeMotorista.getText().toString(),senhaMotorista.getText().toString(),emailMotorista.getText().toString(),edtVeiculo.getText().toString(),edtPlaca.getText().toString(),Integer.valueOf(edtVagasVeiculo.getText().toString()));
+        Motorista x = new Motorista(nomeMotorista.getText().toString(),emailMotorista.getText().toString(),senhaMotorista.getText().toString(),edtVeiculo.getText().toString(),edtPlaca.getText().toString(),Integer.valueOf(edtVagasVeiculo.getText().toString()),tipoUsuario="M");
 
         database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Motoristas");
+        DatabaseReference myRef = database.getReference("Usuarios");
         myRef.push().setValue(x);
 
 

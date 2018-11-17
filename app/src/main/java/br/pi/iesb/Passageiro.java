@@ -2,17 +2,28 @@ package br.pi.iesb;
 
 public class Passageiro {
 
-    private String nomePassageiro,emailPassageiro,senhaPassageiro,idadePassageiro;
+    private String nomePassageiro,emailPassageiro,senhaPassageiro,idadePassageiro,tipoUsuario;
 
 
     public Passageiro(){
 
     }
-    public Passageiro(String nomePassageiro,String emailPassageiro,String senhaPassageiro,String idadePassageiro){
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public Passageiro(String nomePassageiro, String emailPassageiro, String senhaPassageiro, String idadePassageiro, String tipoUsuario){
         this.nomePassageiro = nomePassageiro;
         this.emailPassageiro = emailPassageiro;
         this.senhaPassageiro = senhaPassageiro;
         this.idadePassageiro = idadePassageiro;
+        this.tipoUsuario = tipoUsuario;
+
     }
 
     public String getIdadePassageiro() {
