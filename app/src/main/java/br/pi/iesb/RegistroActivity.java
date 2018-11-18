@@ -77,12 +77,10 @@ public class RegistroActivity extends AppCompatActivity {
         Usuario p = new Usuario(edtNome.getText().toString(),edtEmail.getText().toString(),edtSenha.getText().toString(),edtIdade.getText().toString(),tipoUsuario="P");
         database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Usuarios");
-
         String emailFireBase = edtEmail.getText().toString();
         emailFireBase = emailFireBase.replace("@","_");
         emailFireBase = emailFireBase.replace(".","*");
         myRef.child(emailFireBase).setValue(p);
-
         //myRef.push().setValue(p);
 
     }

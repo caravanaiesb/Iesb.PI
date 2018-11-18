@@ -1,12 +1,14 @@
 package br.pi.iesb;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Evento {
     private String txtNomeEvento;
     private String txtTipoEvento;
     private String txtDataEvento;
     private String txtAtracaoPrincipal;
+    private List<Usuario> motoristaLista = new ArrayList<>();
 
 
     public Evento(){
@@ -53,5 +55,12 @@ public class Evento {
 
     public void setTxtAtracaoPrincipal(String txtAtracaoPrincipal) {
         this.txtAtracaoPrincipal = txtAtracaoPrincipal;
+    }
+    public List<Usuario> getMotoristaLista() {
+        return motoristaLista;
+    }
+
+    public void setMotoristaLista(List<Usuario> motoristaLista) {
+        this.motoristaLista = motoristaLista;
     }
 }

@@ -193,19 +193,11 @@ public class FeedeventActivity extends AppCompatActivity {
                                 Toast.makeText(FeedeventActivity.this, "posicao " + clickPosition, Toast.LENGTH_SHORT).show();
                             }
                         }
-
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
 
                         }
                     });
-                  /*String clickPosition = (String) model.getTxtNomeEvento();
-                    Intent z = new Intent(FeedeventActivity.this,EventDetails.class);
-                    String clickposi = String.valueOf(clickPosition);
-                    z.putExtra("key",clickposi);
-                    startActivity(z);
-                    Toast.makeText(FeedeventActivity.this, "posicao " + clickPosition, Toast.LENGTH_SHORT).show(); */
                 }
             });
         }

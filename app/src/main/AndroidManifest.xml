@@ -71,7 +71,8 @@
         <activity android:name=".SelecionaCadastroActivity" />
         <activity android:name=".CadastroMotorista" />
         <activity android:name=".EventDetails" />
-        <activity android:name=".Event_Detail_Motorista"></activity>
+        <activity android:name=".Event_Detail_Motorista" />
+        <activity android:name=".MotoristaLista"></activity>
     </application>
 
 </manifest>

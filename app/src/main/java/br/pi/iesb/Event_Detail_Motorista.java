@@ -5,11 +5,16 @@ import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,15 +26,65 @@ import com.google.firebase.storage.StorageReference;
 public class Event_Detail_Motorista extends AppCompatActivity {
     private ImageView imgEvento;
     private TextView nomeEventView,descricaoEvento,atracaoEvento,dataEvento;
-    private DatabaseReference databaseReference;
-    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference,refDatabase,refevento;
+    private FirebaseDatabase firebaseDatabase,firebaseData,firebaseevento;
+    private Button btnParticipar;
+    private FirebaseAuth auth;
+    private FirebaseUser firebaseUser;
+    private Usuario c;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event__detail__motorista);
         inicializaComponentes();
         exibirDados();
+        eventosClicks();
     }
+
+    private void eventosClicks() {
+        btnParticipar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                auth = Dao.getFirebaseAuth();
+                firebaseUser = auth.getCurrentUser();
+                firebaseData = FirebaseDatabase.getInstance();
+
+                String emailFireBase = firebaseUser.getEmail();
+                emailFireBase = emailFireBase.replace("@","_");
+                emailFireBase = emailFireBase.replace(".","*");
+
+
+                refDatabase = firebaseData.getReference("Usuarios/"+emailFireBase);
+                refDatabase.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        dataSnapshot.getChildren();
+                        Usuario c = dataSnapshot.getValue(Usuario.class);
+                        if(c==null){
+
+                        }
+                        else
+                            firebaseevento = FirebaseDatabase.getInstance();
+                            String posicao = getIntent().getStringExtra("key");
+                            DatabaseReference myRef = firebaseevento.getReference("Eventos/"+posicao+"/Motoristas Disponiveis/");
+                            String emailMotorista = c.getEmailUsuario().toString();
+                            emailMotorista = emailMotorista.replace("@","_");
+                            emailMotorista = emailMotorista.replace(".","*");
+                            Toast.makeText(Event_Detail_Motorista.this,"Você está participando do evento!",Toast.LENGTH_SHORT);
+                            myRef.child(emailMotorista).setValue(c);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+
+
+
+            }
+        });
+    }
+
     private void exibirDados() {
         firebaseDatabase = FirebaseDatabase.getInstance();
         String posicao = getIntent().getStringExtra("key");
@@ -80,6 +135,8 @@ public class Event_Detail_Motorista extends AppCompatActivity {
         dataEvento = (TextView) findViewById(R.id.dataEvento);
         descricaoEvento = (TextView) findViewById(R.id.tipoEvento);
         atracaoEvento = (TextView) findViewById(R.id.atracaoEvento);
+        btnParticipar = (Button) findViewById(R.id.btnParticipar);
+
 
 
     }
