@@ -33,6 +33,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,10 +53,12 @@ public class FeedeventActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FirebaseDatabase database;
     private List<Evento> eventosLista = new ArrayList<>();
-    private DatabaseReference databaseReference;
-    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference,refDatabase;
+    private FirebaseDatabase firebaseDatabase,firebaseData;
     private FirebaseRecyclerAdapter<Evento,EventRecycleViewHolder> adapter;
     private EventAdapter eventAdapter;
+    private FirebaseAuth auth;
+    FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,13 +158,54 @@ public class FeedeventActivity extends AppCompatActivity {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int clickPosition = (int) view.getTag();
+                    auth = Dao.getFirebaseAuth();
+                    firebaseUser = auth.getCurrentUser();
+                    firebaseData = FirebaseDatabase.getInstance();
+
+                    String emailFireBase = firebaseUser.getEmail();
+                    emailFireBase = emailFireBase.replace("@","_");
+                    emailFireBase = emailFireBase.replace(".","*");
+
+
+                    refDatabase = firebaseData.getReference("Usuarios/"+emailFireBase);
+                    refDatabase.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            dataSnapshot.getChildren();
+                            Usuario c = dataSnapshot.getValue(Usuario.class);
+                            String k = c.getTipoUsuario();
+
+                            if (k.equals("P")) {
+
+                                String clickPosition = (String) model.getTxtNomeEvento();
+                                Intent z = new Intent(FeedeventActivity.this, EventDetails.class);
+                                String clickposi = String.valueOf(clickPosition);
+                                z.putExtra("key", clickposi);
+                                startActivity(z);
+
+                                Toast.makeText(FeedeventActivity.this, "posicao " + clickPosition, Toast.LENGTH_SHORT).show();
+                            } else if(k.equals("M")) {
+                                String clickPosition = (String) model.getTxtNomeEvento();
+                                Intent z = new Intent(FeedeventActivity.this, Event_Detail_Motorista.class);
+                                String clickposi = String.valueOf(clickPosition);
+                                z.putExtra("key", clickposi);
+                                startActivity(z);
+                                Toast.makeText(FeedeventActivity.this, "posicao " + clickPosition, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                  /*String clickPosition = (String) model.getTxtNomeEvento();
                     Intent z = new Intent(FeedeventActivity.this,EventDetails.class);
                     String clickposi = String.valueOf(clickPosition);
                     z.putExtra("key",clickposi);
                     startActivity(z);
-
-                    Toast.makeText(FeedeventActivity.this, "posicao " + clickPosition, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FeedeventActivity.this, "posicao " + clickPosition, Toast.LENGTH_SHORT).show(); */
                 }
             });
         }
@@ -168,5 +213,5 @@ public class FeedeventActivity extends AppCompatActivity {
         public int getItemCount() {
             return eventosLista.size();
         }
-        }
     }
+}

@@ -70,7 +70,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SelecionaCadastroActivity" />
         <activity android:name=".CadastroMotorista" />
-        <activity android:name=".EventDetails"></activity>
+        <activity android:name=".EventDetails" />
+        <activity android:name=".Event_Detail_Motorista"></activity>
     </application>
 
 </manifest>

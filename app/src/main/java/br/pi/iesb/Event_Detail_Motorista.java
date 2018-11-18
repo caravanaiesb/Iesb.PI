@@ -3,14 +3,11 @@ package br.pi.iesb;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
-import android.support.constraint.solver.widgets.Rectangle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -21,11 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-public class EventDetails extends AppCompatActivity {
+public class Event_Detail_Motorista extends AppCompatActivity {
     private ImageView imgEvento;
     private TextView nomeEventView,descricaoEvento,atracaoEvento,dataEvento;
     private DatabaseReference databaseReference;
@@ -33,7 +26,7 @@ public class EventDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_details);
+        setContentView(R.layout.activity_event__detail__motorista);
         inicializaComponentes();
         exibirDados();
     }
@@ -73,7 +66,7 @@ public class EventDetails extends AppCompatActivity {
                 }
             }
 
-                @Override
+            @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
