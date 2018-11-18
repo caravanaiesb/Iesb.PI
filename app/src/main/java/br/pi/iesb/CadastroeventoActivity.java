@@ -152,7 +152,12 @@ public class CadastroeventoActivity extends AppCompatActivity {
             c = new Evento(txtNomeEvento.getText().toString(),txtTipoEvento.getText().toString(),txtDataEvento.getText().toString(),txtAtracaoPrincipal.getText().toString());
             database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference("Eventos");
-            myRef.push().setValue(c);
+            String nomeEvento = txtNomeEvento.getText().toString();
+            nomeEvento = nomeEvento.replace("@","_");
+            nomeEvento = nomeEvento.replace(".","*");
+            myRef.child(nomeEvento).setValue(c);
+
+           // myRef.push().setValue(c);
             enviarImg();
         }
         else {

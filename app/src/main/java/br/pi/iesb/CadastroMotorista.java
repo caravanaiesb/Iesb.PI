@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class CadastroMotorista extends AppCompatActivity {
 
-    private EditText nomeMotorista,emailMotorista,senhaMotorista,edtVeiculo,edtPlaca,edtVagasVeiculo;
+    private EditText nomeUsuario,emailUsuario,senhaUsuario,edtVeiculo,edtPlaca,edtVagasVeiculo;
     private Button btnRegistrarMotorista,btnCancelarRegistroMotorista;
     private String tipoUsuario;
     private FirebaseAuth auth;
@@ -38,12 +38,12 @@ public class CadastroMotorista extends AppCompatActivity {
         btnRegistrarMotorista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!nomeMotorista.getText().toString().equals("") && !senhaMotorista.getText().toString().equals("")) {
-                    if(!emailMotorista.getText().toString().equals("") && !edtVeiculo.getText().toString().equals("")) {
+                if (!nomeUsuario.getText().toString().equals("") && !senhaUsuario.getText().toString().equals("")) {
+                    if(!emailUsuario.getText().toString().equals("") && !edtVeiculo.getText().toString().equals("")) {
                         if(!edtPlaca.getText().toString().equals("") && !edtVagasVeiculo.getText().toString().equals("")){
-                            String email = emailMotorista.getText().toString().trim();
-                            String nome = nomeMotorista.getText().toString().trim();
-                            String senha = senhaMotorista.getText().toString().trim();
+                            String email = emailUsuario.getText().toString().trim();
+                            String nome = nomeUsuario.getText().toString().trim();
+                            String senha = senhaUsuario.getText().toString().trim();
                             criarLoginMotorista(email,senha);
                         }else{
                             alert("Preencha todos campos");
@@ -94,11 +94,16 @@ public class CadastroMotorista extends AppCompatActivity {
 
     private void cadastrarRealtime() {
 
-        Motorista x = new Motorista(nomeMotorista.getText().toString(),emailMotorista.getText().toString(),senhaMotorista.getText().toString(),edtVeiculo.getText().toString(),edtPlaca.getText().toString(),Integer.valueOf(edtVagasVeiculo.getText().toString()),tipoUsuario="M");
+        Usuario x = new Usuario(nomeUsuario.getText().toString(),emailUsuario.getText().toString(),senhaUsuario.getText().toString(),edtVeiculo.getText().toString(),edtPlaca.getText().toString(),Integer.valueOf(edtVagasVeiculo.getText().toString()),tipoUsuario="M");
 
         database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Usuarios");
-        myRef.push().setValue(x);
+
+        String emailFireBase = emailUsuario.getText().toString();
+        emailFireBase = emailFireBase.replace("@","_");
+        emailFireBase = emailFireBase.replace(".","*");
+        myRef.child(emailFireBase).setValue(x);
+        //myRef.push().setValue(x);
 
 
     }
@@ -108,9 +113,9 @@ public class CadastroMotorista extends AppCompatActivity {
     }
 
     private void inicializaComponentes() {
-        nomeMotorista = (EditText) findViewById(R.id.edtNomeMotorista);
-        emailMotorista = (EditText) findViewById(R.id.edtEmailMotorista);
-        senhaMotorista = (EditText) findViewById(R.id.edtSenhaMotorista);
+        nomeUsuario = (EditText) findViewById(R.id.edtNomeMotorista);
+        emailUsuario = (EditText) findViewById(R.id.edtEmailMotorista);
+        senhaUsuario = (EditText) findViewById(R.id.edtSenhaMotorista);
         edtVeiculo = (EditText) findViewById(R.id.edtVeiculo);
         edtPlaca = (EditText) findViewById(R.id.edtPlacaVeiculo);
         edtVagasVeiculo = (EditText) findViewById(R.id.edtVagasVeiculo);
