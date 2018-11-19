@@ -136,7 +136,7 @@ public class CadastroMotorista extends AppCompatActivity {
 
     private void cadastrarRealtime() {
 
-        Usuario x = new Usuario(nomeUsuario.getText().toString(),emailUsuario.getText().toString(),senhaUsuario.getText().toString(),edtVeiculo.getText().toString(),edtPlaca.getText().toString(),Integer.valueOf(edtVagasVeiculo.getText().toString()),tipoUsuario="M",idadeUsuario.getText().toString());
+        Usuario x = new Usuario(nomeUsuario.getText().toString(),emailUsuario.getText().toString(),senhaUsuario.getText().toString(),edtVeiculo.getText().toString(),edtPlaca.getText().toString(),edtVagasVeiculo.getText().toString(),tipoUsuario="M",idadeUsuario.getText().toString());
 
         database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Usuarios");
