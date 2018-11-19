@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,11 +29,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CadastroCarona extends AppCompatActivity {
-    private Button btnRegistrarCarona,btn_Cancelar;
+    private Button btnRegistrarCarona,btn_Cancelar,btnVerificarUsuariosCadastrados;
     private TextView nome_evento,vagas_disponiveis,veiculo_motorista,idade_motorista,nome_Motorista;
     private ImageView img_Motorista;
-    private DatabaseReference databaseReference,refClick,mDatabase;
-    private FirebaseDatabase firebaseDatabase,databaseClick;
+    private DatabaseReference databaseReference,refClick,ref2,mDatabase,refClick2;
+    private FirebaseDatabase firebaseDatabase,databaseClick,database2,firebase3,daabaseUsuario;
+    private FirebaseAuth auth;
+    private FirebaseUser firebaseUser;
 
     public String getVagas() {
         return vagas;
@@ -68,21 +72,102 @@ public class CadastroCarona extends AppCompatActivity {
         btnRegistrarCarona.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String posicao = getIntent().getStringExtra("key");
-                databaseClick = FirebaseDatabase.getInstance();
-                final String emailMotorista = getIntent().getStringExtra("key2");
-                String posicao2 = getIntent().getStringExtra("key");
-                refClick = databaseClick.getReference("Eventos/"+posicao+"/Motoristas Disponiveis/"+emailMotorista);
-                int myNum = 0;
-                myNum = Integer.parseInt(vagas);
-                String y = String.valueOf(myNum-1);
-                mDatabase= FirebaseDatabase.getInstance().getReference();
-                //.child("Eventos/" + posicao + "/Motoristas Disponiveis/" + emailMotorista).child("vagas");
-                Map<String, Object> childUpdates = new HashMap<>();
-                childUpdates.put("Eventos/"+posicao+"/Motoristas Disponiveis/"+emailMotorista+"/vagas",y);
-                mDatabase.updateChildren(childUpdates);
-                Toast.makeText(CadastroCarona.this,"Voce foi cadastrado na Carona!",Toast.LENGTH_LONG).show();
+                auth = Dao.getFirebaseAuth();
+                firebaseUser = auth.getCurrentUser();
+                database2 = FirebaseDatabase.getInstance();
 
+                String emailFireBase = firebaseUser.getEmail();
+                emailFireBase = emailFireBase.replace("@","_");
+                emailFireBase = emailFireBase.replace(".","*");
+
+                final String emailMotorista = getIntent().getStringExtra("key2");
+                ref2 = database2.getReference("Usuarios/"+emailFireBase);
+                ref2.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        dataSnapshot.getChildren();
+                        Usuario c = dataSnapshot.getValue(Usuario.class);
+                        if(c==null){
+
+                        }
+                        else
+                            auth = Dao.getFirebaseAuth();
+                        firebaseUser = auth.getCurrentUser();
+                        database2 = FirebaseDatabase.getInstance();
+
+                        String emailFireBase2 = firebaseUser.getEmail();
+                        emailFireBase2 = emailFireBase2.replace("@","_");
+                        emailFireBase2 = emailFireBase2.replace(".","*");
+                        daabaseUsuario = FirebaseDatabase.getInstance();
+                        final String posicao = getIntent().getStringExtra("key");
+                        refClick2 = daabaseUsuario.getReference("Eventos/"+posicao+"/Motoristas Disponiveis/"+emailMotorista+"/Vagas Ocupadas/"+emailFireBase2);
+                        final String finalEmailFireBase = emailFireBase2;
+                        refClick2.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                dataSnapshot.getChildren();
+                                Usuario x = dataSnapshot.getValue(Usuario.class);
+
+                                if ( x!= null) {
+                                    //Toast.makeText(CadastroCarona.this, "Você Já esta Cadastrado nesta Carona", Toast.LENGTH_SHORT).show();
+                                }
+                                else{
+                                    final String posicao = getIntent().getStringExtra("key");
+                                    databaseClick = FirebaseDatabase.getInstance();
+                                    String posicao2 = getIntent().getStringExtra("key");
+                                    refClick = databaseClick.getReference("Eventos/"+posicao+"/Motoristas Disponiveis/"+emailMotorista+"/");
+                                    int myNum = 0;
+                                    myNum = Integer.parseInt(vagas);
+                                    String y = String.valueOf(myNum-1);
+                                    mDatabase= FirebaseDatabase.getInstance().getReference();
+                                    Map<String, Object> childUpdates = new HashMap<>();
+                                    childUpdates.put("Eventos/"+posicao+"/Motoristas Disponiveis/"+emailMotorista+"/vagas",y);
+                                    mDatabase.updateChildren(childUpdates);
+                                    Toast.makeText(CadastroCarona.this,"Voce foi cadastrado na Carona!",Toast.LENGTH_LONG).show();
+                                    Intent i = new Intent(CadastroCarona.this,FeedeventActivity.class);
+                                    startActivity(i);
+                                    finish();
+
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+
+                            firebase3 = FirebaseDatabase.getInstance();
+                            //String posicao = getIntent().getStringExtra("key");
+                            DatabaseReference myRef = firebase3.getReference("Eventos/"+posicao+"/Motoristas Disponiveis/"+emailMotorista+"/Vagas Ocupadas");
+                            String emailUsuario = c.getEmailUsuario().toString();
+                            emailUsuario = emailUsuario.replace("@","_");
+                            emailUsuario = emailUsuario.replace(".","*");
+                            myRef.child(emailUsuario).setValue(c);
+                            Toast.makeText(CadastroCarona.this,"Voce ja está cadastrado nesta carona!",Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(CadastroCarona.this,FeedeventActivity.class);
+                            startActivity(i);
+                            finish();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+
+
+            }
+        });
+        btnVerificarUsuariosCadastrados.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String posicao = getIntent().getStringExtra("key");
+                final String emailMotorista = getIntent().getStringExtra("key2");
+                Intent i = new Intent(CadastroCarona.this,PassageiroLista.class);
+                i.putExtra("key2", emailMotorista);
+                i.putExtra("key",posicao);
+                startActivity(i);
+                finish();
             }
         });
 
@@ -161,6 +246,7 @@ public class CadastroCarona extends AppCompatActivity {
     private void inicializaComponentes() {
         btnRegistrarCarona = (Button) findViewById(R.id.btnRegistrarCarona);
         btn_Cancelar = (Button) findViewById(R.id.btn_Cancelar);
+        btnVerificarUsuariosCadastrados = (Button) findViewById(R.id.btnVerificarUsuariosCadastrados);
         nome_evento = (TextView) findViewById(R.id.nome_evento);
         vagas_disponiveis = (TextView) findViewById(R.id.vagas_disponiveis);
         veiculo_motorista = (TextView) findViewById(R.id.veiculo_motorista);

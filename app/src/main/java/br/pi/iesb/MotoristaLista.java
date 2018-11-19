@@ -37,10 +37,7 @@ public class MotoristaLista extends AppCompatActivity {
     private List<Usuario> usuartioLista = new ArrayList<>();
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
-    private FirebaseRecyclerAdapter<Usuario,MotoristaRecycleView> mmotoristaadapter;
     private MotoristaAdapter motoristaadapter;
-    private FirebaseAuth auth;
-    FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
