@@ -15,6 +15,22 @@
     android:layout_height="match_parent"
     tools:context=".RegistroActivity">
 
+    <Button
+        android:id="@+id/btnCarregarImgPerfilPassageiro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/google_buttons"
+        android:text="Carregar imagem"
+        android:textColor="@color/com_facebook_button_background_color_focused"
+        android:textColorHint="@color/com_facebook_button_background_color_focused"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtIdade" />
+
     <EditText
         android:id="@+id/edtNome"
         android:layout_width="match_parent"
@@ -92,16 +108,17 @@
         android:id="@+id/btnRegistrarse"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:hint="@string/registrar_se"
         android:background="@color/common_google_signin_btn_text_dark_focused"
+        android:hint="@string/registrar_se"
         android:textColorHint="@color/com_facebook_button_background_color_focused"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtIdade"
+        app:layout_constraintTop_toBottomOf="@+id/btnCarregarImgPerfilPassageiro"
         tools:ignore="HardcodedText" />
 
     <Button
@@ -109,8 +126,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:background="@color/common_google_signin_btn_text_dark_focused"
         android:hint="@string/voltar"
         android:textColorHint="@color/com_facebook_button_background_color_focused"
@@ -118,7 +135,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toBottomOf="@+id/edtIdade"
+        app:layout_constraintTop_toBottomOf="@+id/btnCarregarImgPerfilPassageiro"
         tools:ignore="HardcodedText" />
 
     <android.support.constraint.Guideline
