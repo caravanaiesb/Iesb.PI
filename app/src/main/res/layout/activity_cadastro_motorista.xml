@@ -107,7 +107,7 @@
             app:layout_constraintEnd_toEndOf="@+id/edtSenhaMotorista"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/edtSenhaMotorista"
-            app:layout_constraintTop_toBottomOf="@+id/edtSenhaMotorista"
+            app:layout_constraintTop_toBottomOf="@+id/idadeUsuario"
             tools:ignore="MissingConstraints"
             tools:targetApi="o" />
 
@@ -128,6 +128,21 @@
             app:layout_constraintStart_toStartOf="@+id/edtPlacaVeiculo"
             app:layout_constraintTop_toBottomOf="@+id/edtPlacaVeiculo"
             tools:ignore="UnusedAttribute" />
+
+        <EditText
+            android:id="@+id/idadeUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:autofillHints="@string/idade"
+            android:background="@color/com_facebook_button_background_color_focused"
+            android:hint="Idade"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtSenhaMotorista" />
 
         <Button
             android:id="@+id/btnCancelarRegistroMotorista"

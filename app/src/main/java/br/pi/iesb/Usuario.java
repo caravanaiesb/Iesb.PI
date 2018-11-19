@@ -9,7 +9,7 @@ public class Usuario {
     public Usuario(){
 
     }
-    public Usuario(String nomeUsuario, String emailUsuario, String senhaUsuario, String veiculo, String placa, Integer vagas, String tipoUsuario) {
+    public Usuario(String nomeUsuario, String emailUsuario, String senhaUsuario, String veiculo, String placa, Integer vagas, String tipoUsuario,String idadeUsuario) {
 
         this.nomeUsuario = nomeUsuario;
         this.emailUsuario = emailUsuario;
@@ -18,6 +18,7 @@ public class Usuario {
         this.placa = placa;
         this.vagas = vagas;
         this.tipoUsuario = tipoUsuario;
+        this.idadeUsuario = idadeUsuario;
 
     }
 

@@ -30,7 +30,7 @@ import java.io.IOException;
 
 public class CadastroMotorista extends AppCompatActivity {
 
-    private EditText nomeUsuario,emailUsuario,senhaUsuario,edtVeiculo,edtPlaca,edtVagasVeiculo;
+    private EditText nomeUsuario,emailUsuario,senhaUsuario,edtVeiculo,edtPlaca,edtVagasVeiculo,idadeUsuario;
     private Button btnRegistrarMotorista,btnCancelarRegistroMotorista,btnCarregarImgPerfil;
     private String tipoUsuario;
     private FirebaseAuth auth;
@@ -136,7 +136,7 @@ public class CadastroMotorista extends AppCompatActivity {
 
     private void cadastrarRealtime() {
 
-        Usuario x = new Usuario(nomeUsuario.getText().toString(),emailUsuario.getText().toString(),senhaUsuario.getText().toString(),edtVeiculo.getText().toString(),edtPlaca.getText().toString(),Integer.valueOf(edtVagasVeiculo.getText().toString()),tipoUsuario="M");
+        Usuario x = new Usuario(nomeUsuario.getText().toString(),emailUsuario.getText().toString(),senhaUsuario.getText().toString(),edtVeiculo.getText().toString(),edtPlaca.getText().toString(),Integer.valueOf(edtVagasVeiculo.getText().toString()),tipoUsuario="M",idadeUsuario.getText().toString());
 
         database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Usuarios");
@@ -200,6 +200,7 @@ public class CadastroMotorista extends AppCompatActivity {
         senhaUsuario = (EditText) findViewById(R.id.edtSenhaMotorista);
         edtVeiculo = (EditText) findViewById(R.id.edtVeiculo);
         edtPlaca = (EditText) findViewById(R.id.edtPlacaVeiculo);
+        idadeUsuario = (EditText) findViewById(R.id.idadeUsuario);
         edtVagasVeiculo = (EditText) findViewById(R.id.edtVagasVeiculo);
         btnRegistrarMotorista =(Button) findViewById(R.id.btnRegistrarMotorista);
         btnCancelarRegistroMotorista = (Button) findViewById(R.id.btnCancelarRegistroMotorista);

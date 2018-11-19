@@ -49,6 +49,7 @@ public class MotoristaLista extends AppCompatActivity {
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
        // setSupportActionBar(toolbar);
         mostrarFeed();
+
     }
 
     private void mostrarFeed() {
@@ -101,12 +102,13 @@ public class MotoristaLista extends AppCompatActivity {
 
             FirebaseStorage storage = FirebaseStorage.getInstance();
             Usuario usuar = usuartioLista.get(i);
-            String posicao = getIntent().getStringExtra("key");
-            String emailUsuarioStorage = usuar.getEmailUsuario();
-            emailUsuarioStorage = emailUsuarioStorage.replace("@","_");
-            emailUsuarioStorage = emailUsuarioStorage.replace(".","*");
+            final String posicao = getIntent().getStringExtra("key");
+            final String[] motoristaClickado = {(String) usuar.getEmailUsuario()};
+            final String[] emailUsuarioStorage = {usuar.getEmailUsuario()};
+            emailUsuarioStorage[0] = emailUsuarioStorage[0].replace("@","_");
+            emailUsuarioStorage[0] = emailUsuarioStorage[0].replace(".","*");
 
-            StorageReference ref = storage.getReference().child("Usuarios/"+emailUsuarioStorage);
+            StorageReference ref = storage.getReference().child("Usuarios/"+ emailUsuarioStorage[0]);
             final long FIVE_MEGABYTE = 5120 * 1024;
             ref.getBytes(FIVE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                 @Override
@@ -124,12 +126,19 @@ public class MotoristaLista extends AppCompatActivity {
             motoristaRecycleView.veiculoMotorista.setText(usuar.getVeiculo());
             motoristaRecycleView.txtVagasDiponiveis.setText(usuar.getVagas().toString());
 
-            //motoristaRecycleView.itemView.setTag(i);
-            //motoristaRecycleView.itemView.setOnClickListener(new View.OnClickListener() {
-              //  @Override
-                //public void onClick(View view) {
+            motoristaRecycleView.itemView.setTag(i);
+            motoristaRecycleView.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                //}});
+                    Intent z = new Intent(MotoristaLista.this, CadastroCarona.class);
+                    z.putExtra("key", posicao);
+                    motoristaClickado[0] = motoristaClickado[0].replace("@","_");
+                    motoristaClickado[0] = motoristaClickado[0].replace(".","*");
+                    z.putExtra("key2", motoristaClickado[0]);
+                    startActivity(z);
+
+                }});
 
         }
 
