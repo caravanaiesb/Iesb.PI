@@ -12,6 +12,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -28,6 +29,14 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback, GoogleMap.OnMapClickListener, LocationListener {
@@ -35,6 +44,9 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     private static final String TAG = "MapsFragment";
     private GoogleMap mMap;
     private LocationManager locationManager;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
+    private List<Evento> eventosLista = new ArrayList<>();
 
 
 
@@ -42,37 +54,25 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getMapAsync(this);
-        
-
-
     }
 
     @SuppressLint("MissingPermission")
     @Override
     public void onResume() {
         super.onResume();
-
     }
-
     @Override
     public void onPause() {
         super.onPause();
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         locationManager.removeUpdates(this);
-
     }
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
         try {
             locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-
-
             mMap = googleMap;
-
             mMap.setOnMapClickListener(this);
-
             mMap.getUiSettings().setZoomControlsEnabled(true);
             if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
@@ -81,13 +81,10 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                 mMap.setMyLocationEnabled(true);
             }
             mMap.setMyLocationEnabled(true);
-
-
             try {
                 boolean success = googleMap.setMapStyle(
                         MapStyleOptions
                                 .loadRawResourceStyle(getContext(), R.raw.mapstyle));
-
                 if (!success) {
                     Log.e("MapsFragment", "Style parsing failed.");
                 }
@@ -98,26 +95,56 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             if(lastKnownLocation==null){
                 Location loc = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
                 LatLng userLocation = new LatLng(loc.getLatitude(), loc.getLongitude());
-                MarkerOptions marker = new MarkerOptions();
-                marker.position(userLocation);
-                marker.title("Aqui O");
+                //MarkerOptions marker = new MarkerOptions();
+                //marker.position(userLocation);
+                //marker.title("Aqui O");
                 LatLng latLng = new LatLng(userLocation.latitude, userLocation.longitude);
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15);
                 mMap.animateCamera(cameraUpdate);
                 }else{
-
-
             LatLng userLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
             MarkerOptions marker = new MarkerOptions();
-            marker.position(userLocation);
-            marker.title("Aqui O");
-            marker = new MarkerOptions();
-            marker.position(userLocation);
+            //marker.position(userLocation);
+            //marker.title("Aqui O");
+            //marker = new MarkerOptions();
+            //marker.position(userLocation);
+
+            MarkerOptions markEventos = new MarkerOptions();
+
             //marker.title("Marker em Sidney");
             //mMap.addMarker(marker);
             LatLng latLng = new LatLng(userLocation.latitude, userLocation.longitude);
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15);
             mMap.animateCamera(cameraUpdate);
+
+            // Recuperar EVENTOS e plotar localizacoes no map
+                firebaseDatabase = FirebaseDatabase.getInstance();
+                databaseReference = firebaseDatabase.getReference("Eventos");
+
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        eventosLista.clear();
+                        for(DataSnapshot snap : dataSnapshot.getChildren()){
+                            Evento a =snap.getValue(Evento.class);
+                            Log.d("Eventos",a.toString());
+                            eventosLista.add(a);
+
+
+
+
+
+                        }
+
+                        //eventAdapter.notifyDataSetChanged();
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
         }}
         catch (SecurityException ex)
         {
@@ -127,15 +154,28 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     }
     @Override
     public void onMapClick(LatLng latLng) {
-        Toast.makeText(getContext(),"Coordenadas: "+latLng.toString(),Toast.LENGTH_SHORT).show();
-        Intent i = new Intent(getContext(),Event_Detail_Motorista.class);
-        String lat= String.valueOf(latLng.latitude);
-        String longi= String.valueOf(latLng.longitude);
-        i.putExtra("latitude",lat);
-        i.putExtra("long",longi);
+        String chave = getActivity().getIntent().getStringExtra("Chave");
+        if(chave.equals("C")) {
+            Toast.makeText(getContext(), "Coordenadas: " + latLng.toString(), Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(getContext(), Event_Detail_Motorista.class);
+            String lat = String.valueOf(latLng.latitude);
+            String longi = String.valueOf(latLng.longitude);
+            i.putExtra("latitude", lat);
+            i.putExtra("long", longi);
+            startActivity(i);
+        }
+    if(chave.equals("E")) {
+        Intent i = new Intent(getContext(), CadastroeventoActivity.class);
+        String lat = String.valueOf(latLng.latitude);
+        String longi = String.valueOf(latLng.longitude);
+        i.putExtra("latitude", lat);
+        i.putExtra("long", longi);
         String posicao = getActivity().getIntent().getStringExtra("key");
-        i.putExtra("key",posicao);
+        i.putExtra("key", posicao);
         startActivity(i);
+
+
+    }
     }
 
     @Override

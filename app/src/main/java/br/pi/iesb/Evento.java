@@ -9,6 +9,8 @@ public class Evento {
     private String txtDataEvento;
     private String txtAtracaoPrincipal;
     private List<Usuario> motoristaLista = new ArrayList<>();
+    private String latitude;
+    private String longitude;
 
 
     public Evento(){
@@ -62,5 +64,21 @@ public class Evento {
 
     public void setMotoristaLista(List<Usuario> motoristaLista) {
         this.motoristaLista = motoristaLista;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 }

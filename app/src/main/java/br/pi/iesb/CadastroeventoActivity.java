@@ -74,8 +74,8 @@ public class CadastroeventoActivity extends AppCompatActivity {
         btnCadastrarEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cadastraEvento();
 
+                cadastraEvento();
             }
         });
 
@@ -147,9 +147,25 @@ public class CadastroeventoActivity extends AppCompatActivity {
         }
     }
     private void cadastraEvento() {
+        //Chave = F se estiver vindo do Feed Activity
+        String chave = getIntent().getStringExtra("Chave");
+        if(chave.equals("F")){
+
+        }
+        else{
         Evento c = null;
+            Intent i = new Intent(CadastroeventoActivity.this,MenuActivity.class);
+            Toast.makeText(CadastroeventoActivity.this,"Clique no local do evento!",Toast.LENGTH_LONG).show();
+            i.putExtra("Chave","E");
+            startActivity(i);
+
+
         if(validateFields(txtNomeEvento.getText().toString(),txtTipoEvento.getText().toString(),txtDataEvento.getText().toString(),txtAtracaoPrincipal.getText().toString())){
             c = new Evento(txtNomeEvento.getText().toString(),txtTipoEvento.getText().toString(),txtDataEvento.getText().toString(),txtAtracaoPrincipal.getText().toString());
+            String latitude = getIntent().getStringExtra("latitude");
+            String longitude = getIntent().getStringExtra("long");
+            c.setLatitude(latitude);
+            c.setLongitude(longitude);
             database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference("Eventos");
             String nomeEvento = txtNomeEvento.getText().toString();
@@ -163,7 +179,7 @@ public class CadastroeventoActivity extends AppCompatActivity {
         else {
             alert("Falha ao tentar cadastrar novo evento");
         }
-    }
+    }}
 
     private boolean validateFields(String nomeEvento, String tipoEvento, String dataEveto, String atracao) {
 

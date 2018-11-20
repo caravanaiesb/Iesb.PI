@@ -102,6 +102,7 @@ public class Event_Detail_Motorista extends AppCompatActivity {
                 Intent i = new Intent(Event_Detail_Motorista.this,MenuActivity.class);
                 Toast.makeText(Event_Detail_Motorista.this,"Clique no local do evento!",Toast.LENGTH_LONG).show();
                 i.putExtra("key",posicao);
+                i.putExtra("Chave","C");
                 startActivity(i);
             }
         });
