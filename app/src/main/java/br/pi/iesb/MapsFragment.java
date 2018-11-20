@@ -42,6 +42,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getMapAsync(this);
+        
 
 
     }
@@ -124,10 +125,17 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         }
 
     }
-
     @Override
     public void onMapClick(LatLng latLng) {
         Toast.makeText(getContext(),"Coordenadas: "+latLng.toString(),Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(getContext(),Event_Detail_Motorista.class);
+        String lat= String.valueOf(latLng.latitude);
+        String longi= String.valueOf(latLng.longitude);
+        i.putExtra("latitude",lat);
+        i.putExtra("long",longi);
+        String posicao = getActivity().getIntent().getStringExtra("key");
+        i.putExtra("key",posicao);
+        startActivity(i);
     }
 
     @Override
@@ -153,4 +161,5 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     public void onProviderDisabled(String provider) {
 
     }
+
 }

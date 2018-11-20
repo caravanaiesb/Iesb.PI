@@ -1,5 +1,6 @@
 package br.pi.iesb;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,17 +30,23 @@ public class Event_Detail_Motorista extends AppCompatActivity {
     private TextView nomeEventView,descricaoEvento,atracaoEvento,dataEvento;
     private DatabaseReference databaseReference,refDatabase,refevento;
     private FirebaseDatabase firebaseDatabase,firebaseData,firebaseevento;
-    private Button btnParticipar;
+    private Button btnParticipar,btnLoc;
     private FirebaseAuth auth;
     private FirebaseUser firebaseUser;
     private Usuario c;
+    String posicao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event__detail__motorista);
         inicializaComponentes();
         exibirDados();
+        posicao = getIntent().getStringExtra("key");
         eventosClicks();
+        String longitude = getIntent().getStringExtra("long");
+        String latitude = getIntent().getStringExtra("latitude");
+
+
     }
 
     private void eventosClicks() {
@@ -60,27 +68,41 @@ public class Event_Detail_Motorista extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         dataSnapshot.getChildren();
                         Usuario c = dataSnapshot.getValue(Usuario.class);
-                        if(c==null){
+                        String longitude = getIntent().getStringExtra("long");
+                        String latitude = getIntent().getStringExtra("latitude");
+                        if(c==null || longitude==null){
 
                         }
                         else
                             firebaseevento = FirebaseDatabase.getInstance();
-                            String posicao = getIntent().getStringExtra("key");
+
                             DatabaseReference myRef = firebaseevento.getReference("Eventos/"+posicao+"/Motoristas Disponiveis/");
                             String emailMotorista = c.getEmailUsuario().toString();
                             emailMotorista = emailMotorista.replace("@","_");
                             emailMotorista = emailMotorista.replace(".","*");
+                            c.setPartidaLatitude(latitude);
+                            c.setPartidaLongitude(longitude);
                             Toast.makeText(Event_Detail_Motorista.this,"Você está participando do evento!",Toast.LENGTH_SHORT);
                             myRef.child(emailMotorista).setValue(c);
+                            Intent i = new Intent(Event_Detail_Motorista.this,FeedeventActivity.class);
+                            startActivity(i);
+                            finish();
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
                 });
+            }
+        });
 
 
-
+        btnLoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Event_Detail_Motorista.this,MenuActivity.class);
+                Toast.makeText(Event_Detail_Motorista.this,"Clique no local do evento!",Toast.LENGTH_LONG).show();
+                i.putExtra("key",posicao);
+                startActivity(i);
             }
         });
     }
@@ -136,6 +158,7 @@ public class Event_Detail_Motorista extends AppCompatActivity {
         descricaoEvento = (TextView) findViewById(R.id.tipoEvento);
         atracaoEvento = (TextView) findViewById(R.id.atracaoEvento);
         btnParticipar = (Button) findViewById(R.id.btnParticipar);
+        btnLoc = (Button) findViewById(R.id.btnLoc);
 
 
 

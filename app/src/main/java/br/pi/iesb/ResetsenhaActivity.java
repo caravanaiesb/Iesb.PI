@@ -23,6 +23,9 @@ public class ResetsenhaActivity extends AppCompatActivity {
         setContentView(R.layout.resetsenha);
         inicializarComponentes();
         eventoClick();
+        String latitude = getIntent().getStringExtra("latitude");
+        String longitude = getIntent().getStringExtra("longitude");
+
     }
     private void eventoClick(){
         btnEnviar.setOnClickListener(new View.OnClickListener() {

@@ -127,5 +127,20 @@
             android:orientation="vertical"
             app:layout_constraintGuide_begin="188dp" />
 
+        <Button
+            android:id="@+id/btnLoc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Button"
+            android:textColor="@color/com_facebook_button_background_color_focused"
+            android:textColorHint="@color/com_facebook_button_background_color_focused"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline15"
+            app:layout_constraintTop_toTopOf="@+id/guideline14" />
+
     </android.support.constraint.ConstraintLayout>
 </LinearLayout>

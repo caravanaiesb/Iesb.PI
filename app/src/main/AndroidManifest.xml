@@ -75,7 +75,7 @@
         <activity android:name=".MotoristaLista" />
         <activity android:name=".CadastroCarona" />
         <activity android:name=".PassageiroLista" />
-        <activity android:name=".PerfilActivity"></activity>
+        <activity android:name=".PerfilActivity" />
     </application>
 
 </manifest>

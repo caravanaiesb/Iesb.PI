@@ -2,7 +2,7 @@ package br.pi.iesb;
 
 public class Usuario {
 
-    private String nomeUsuario,emailUsuario,senhaUsuario,veiculo,placa,idadeUsuario,tipoUsuario,vagas;
+    private String nomeUsuario,emailUsuario,senhaUsuario,veiculo,placa,idadeUsuario,tipoUsuario,vagas,partidaLatitude,partidaLongitude;
 
 
     public Usuario(){
@@ -92,5 +92,22 @@ public class Usuario {
 
     public void setVagas(String vagas) {
         this.vagas = vagas;
+    }
+
+    public String getPartidaLatitude() {
+        return partidaLatitude;
+    }
+
+    public String getPartidaLongitude() {
+        return partidaLongitude;
+    }
+
+    public void setPartidaLongitude(String partidaLongitude) {
+        this.partidaLongitude = partidaLongitude;
+    }
+
+    public void setPartidaLatitude(String partidaLatitude) {
+        this.partidaLatitude = partidaLatitude;
+
     }
 }
