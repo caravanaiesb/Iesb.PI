@@ -150,16 +150,13 @@ public class CadastroeventoActivity extends AppCompatActivity {
         //Chave = F se estiver vindo do Feed Activity
         String chave = getIntent().getStringExtra("Chave");
         if(chave.equals("F")){
-
-        }
-        else{
-        Evento c = null;
             Intent i = new Intent(CadastroeventoActivity.this,MenuActivity.class);
             Toast.makeText(CadastroeventoActivity.this,"Clique no local do evento!",Toast.LENGTH_LONG).show();
             i.putExtra("Chave","E");
             startActivity(i);
-
-
+        }
+        else{
+        Evento c = null;
         if(validateFields(txtNomeEvento.getText().toString(),txtTipoEvento.getText().toString(),txtDataEvento.getText().toString(),txtAtracaoPrincipal.getText().toString())){
             c = new Evento(txtNomeEvento.getText().toString(),txtTipoEvento.getText().toString(),txtDataEvento.getText().toString(),txtAtracaoPrincipal.getText().toString());
             String latitude = getIntent().getStringExtra("latitude");
@@ -175,6 +172,9 @@ public class CadastroeventoActivity extends AppCompatActivity {
 
            // myRef.push().setValue(c);
             enviarImg();
+            Intent i = new Intent(CadastroeventoActivity.this,FeedeventActivity.class);
+            startActivity(i);
+            finish();
         }
         else {
             alert("Falha ao tentar cadastrar novo evento");

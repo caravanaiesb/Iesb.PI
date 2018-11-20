@@ -129,17 +129,16 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                             Evento a =snap.getValue(Evento.class);
                             Log.d("Eventos",a.toString());
                             eventosLista.add(a);
-
-
-
-
-
                         }
-
-                        //eventAdapter.notifyDataSetChanged();
-
+                        for(int j=0;j<eventosLista.size();j++){
+                            Evento model = eventosLista.get(j);
+                            LatLng eventolocation = new LatLng(Double.parseDouble(model.getLatitude()), Double.parseDouble(model.getLongitude()));
+                            MarkerOptions marker = new MarkerOptions();
+                            marker.position(eventolocation);
+                            marker.title(model.getTxtNomeEvento());
+                            mMap.addMarker(marker);
+                        }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -172,6 +171,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         i.putExtra("long", longi);
         String posicao = getActivity().getIntent().getStringExtra("key");
         i.putExtra("key", posicao);
+        i.putExtra("Chave","M");
         startActivity(i);
 
 

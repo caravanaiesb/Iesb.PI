@@ -113,8 +113,9 @@ public class FeedeventActivity extends AppCompatActivity {
 
         int id = item.getItemId();
         if (id == R.id.action_CadastrarEvento) {
-            Intent i = new Intent(FeedeventActivity.this,CadastroeventoActivity.class);
-            i.putExtra("Chave","F");
+            Intent i = new Intent(FeedeventActivity.this,MenuActivity.class);
+            Toast.makeText(FeedeventActivity.this,"Clique onde será o evento!",Toast.LENGTH_LONG).show();
+            i.putExtra("Chave","E");
             startActivity(i);
         }
 
