@@ -155,6 +155,7 @@ public class CadastroeventoActivity extends AppCompatActivity {
             Toast.makeText(CadastroeventoActivity.this,"Clique no local do evento!",Toast.LENGTH_LONG).show();
             i.putExtra("Chave","E");
             startActivity(i);
+            finish();
         }
         else{
         Evento c = null;

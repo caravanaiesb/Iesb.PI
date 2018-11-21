@@ -105,6 +105,7 @@ public class Event_Detail_Motorista extends AppCompatActivity {
                 i.putExtra("key",posicao);
                 i.putExtra("Chave","C");
                 startActivity(i);
+                finish();
             }
         });
     }

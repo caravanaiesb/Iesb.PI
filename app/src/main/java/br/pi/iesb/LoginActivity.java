@@ -181,7 +181,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
+                        String chave = "L";
                         Intent i = new Intent(LoginActivity.this,MenuActivity.class);
+                        i.putExtra("Chave",chave);
                         startActivity(i);
                     }
                     else{

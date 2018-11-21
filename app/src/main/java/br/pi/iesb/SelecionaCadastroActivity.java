@@ -29,6 +29,7 @@ public class SelecionaCadastroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(SelecionaCadastroActivity.this,RegistroActivity.class);
                 startActivity(i);
+                finish();
             }
         });
         btnMotorista.setOnClickListener(new View.OnClickListener() {
@@ -36,6 +37,7 @@ public class SelecionaCadastroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(SelecionaCadastroActivity.this,CadastroMotorista.class);
                 startActivity(i);
+                finish();
             }
         });
     }

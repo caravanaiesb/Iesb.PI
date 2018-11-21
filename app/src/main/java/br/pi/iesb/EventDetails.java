@@ -31,7 +31,7 @@ import java.util.List;
 
 public class EventDetails extends AppCompatActivity {
     private ImageView imgEvento;
-    private Button btnVerificar;
+    private Button btnVerificar,btnVoltardetail;
     private TextView nomeEventView,descricaoEvento,atracaoEvento,dataEvento;
     private DatabaseReference databaseReference,refClick;
     private FirebaseDatabase firebaseDatabase,databaseClick;
@@ -73,6 +73,12 @@ public class EventDetails extends AppCompatActivity {
 
                     }
                 });
+            }
+        });
+        btnVoltardetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -128,6 +134,7 @@ public class EventDetails extends AppCompatActivity {
         descricaoEvento = (TextView) findViewById(R.id.tipoEvento);
         atracaoEvento = (TextView) findViewById(R.id.atracaoEvento);
         btnVerificar = (Button) findViewById(R.id.btnVerificar);
+        btnVoltardetail = (Button) findViewById(R.id.btnVoltardetail);
 
 
     }

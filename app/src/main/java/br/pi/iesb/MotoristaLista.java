@@ -133,6 +133,7 @@ public class MotoristaLista extends AppCompatActivity {
                     motoristaClickado[0] = motoristaClickado[0].replace(".","*");
                     z.putExtra("key2", motoristaClickado[0]);
                     startActivity(z);
+                    finish();
 
                 }});
 

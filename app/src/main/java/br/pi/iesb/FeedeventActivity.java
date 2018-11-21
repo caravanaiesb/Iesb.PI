@@ -116,6 +116,7 @@ public class FeedeventActivity extends AppCompatActivity {
             Toast.makeText(FeedeventActivity.this,"Clique onde será o evento!",Toast.LENGTH_LONG).show();
             i.putExtra("Chave","E");
             startActivity(i);
+
         }
 
         return super.onOptionsItemSelected(item);
