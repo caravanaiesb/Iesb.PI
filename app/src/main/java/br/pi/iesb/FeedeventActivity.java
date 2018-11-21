@@ -67,6 +67,7 @@ public class FeedeventActivity extends AppCompatActivity {
         setContentView(R.layout.feedevent);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("Lista de Eventos");
         mostrarFeed();
 
     }
@@ -155,6 +156,7 @@ public class FeedeventActivity extends AppCompatActivity {
             holder.txtNomeEvent.setText(model.getTxtNomeEvento());
             holder.txtDescEvent.setText(model.getTxtTipoEvento());
             holder.txtAtracao.setText(model.getTxtAtracaoPrincipal());
+            holder.dataEvent.setText(model.getTxtDataEvento());
 
             holder.itemView.setTag(i);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -184,15 +186,12 @@ public class FeedeventActivity extends AppCompatActivity {
                                 String clickposi = String.valueOf(clickPosition);
                                 z.putExtra("key", clickposi);
                                 startActivity(z);
-
-                                Toast.makeText(FeedeventActivity.this, "posicao " + clickPosition, Toast.LENGTH_SHORT).show();
                             } else if(k.equals("M")) {
                                 String clickPosition = (String) model.getTxtNomeEvento();
                                 Intent z = new Intent(FeedeventActivity.this, Event_Detail_Motorista.class);
                                 String clickposi = String.valueOf(clickPosition);
                                 z.putExtra("key", clickposi);
                                 startActivity(z);
-                                Toast.makeText(FeedeventActivity.this, "posicao " + clickPosition, Toast.LENGTH_SHORT).show();
                             }
                         }
                         @Override

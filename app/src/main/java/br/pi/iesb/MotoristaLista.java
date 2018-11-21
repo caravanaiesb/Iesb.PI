@@ -43,8 +43,7 @@ public class MotoristaLista extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_motorista_lista);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
-       // setSupportActionBar(toolbar);
+        setTitle("Motoristas disponiveis");
         mostrarFeed();
 
     }

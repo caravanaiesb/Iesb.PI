@@ -3,6 +3,8 @@ package br.pi.iesb;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
 import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -25,17 +27,21 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class CadastroCarona extends AppCompatActivity {
     private Button btnRegistrarCarona,btn_Cancelar,btnVerificarUsuariosCadastrados;
-    private TextView nome_evento,vagas_disponiveis,veiculo_motorista,idade_motorista,nome_Motorista;
+    private TextView nome_evento,vagas_disponiveis,veiculo_motorista,idade_motorista,nome_Motorista,txtLocation;
     private ImageView img_Motorista;
-    private DatabaseReference databaseReference,refClick,ref2,mDatabase,refClick2;
-    private FirebaseDatabase firebaseDatabase,databaseClick,database2,firebase3,daabaseUsuario;
+    private DatabaseReference databaseReference,refClick,ref2,mDatabase,refClick2,databaseReferenceEvento;
+    private FirebaseDatabase firebaseDatabase,databaseClick,database2,firebase3,daabaseUsuario,firebaseDatabaseEvento;
     private FirebaseAuth auth;
     private FirebaseUser firebaseUser;
+    private Geocoder geocoder;
 
     public String getVagas() {
         return vagas;
@@ -51,6 +57,7 @@ public class CadastroCarona extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_carona);
+        setTitle("Registro na carona");
         inicializaComponentes();
         exibirDados();
         eventoClicks();
@@ -185,7 +192,19 @@ public class CadastroCarona extends AppCompatActivity {
                 if ( x == null){
                 }else
                 {
+                    Geocoder myLocation = new Geocoder(getApplicationContext(), Locale.getDefault());
+                    try {
+
+                        List<Address> myList = myLocation.getFromLocation(Double.parseDouble(x.getLatitude()),Double.parseDouble(x.getLongitude()), 1);
+                        Address address = (Address) myList.get(0);
+                        String addressStr = address.getAddressLine(0);
+                        txtLocation.setText(addressStr);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                     nome_evento.setText(x.getTxtNomeEvento());
+
                 }
             }
 
@@ -253,5 +272,6 @@ public class CadastroCarona extends AppCompatActivity {
         idade_motorista = (TextView) findViewById(R.id.idade_motorista);
         nome_Motorista = (TextView) findViewById(R.id.nome_Motorista);
         img_Motorista = (ImageView) findViewById(R.id.img_Motorista);
+        txtLocation = (TextView) findViewById(R.id.txtLocation);
     }
 }

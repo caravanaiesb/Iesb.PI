@@ -40,6 +40,7 @@ public class EventDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_details);
         inicializaComponentes();
+        setTitle("Detalhes do Evento");
         exibirDados();
         eventoClicks();
     }

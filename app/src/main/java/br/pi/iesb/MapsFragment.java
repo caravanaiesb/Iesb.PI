@@ -124,6 +124,10 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                             Log.d("Eventos",a.toString());
                             eventosLista.add(a);
                         }
+                        if(eventosLista==null){
+
+                        }
+                        else
                         for(int j=0;j<eventosLista.size();j++){
                             Evento model = eventosLista.get(j);
                             LatLng eventolocation = new LatLng(Double.parseDouble(model.getLatitude()), Double.parseDouble(model.getLongitude()));
@@ -179,7 +183,6 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     public void onMapClick(LatLng latLng) {
         String chave = getActivity().getIntent().getStringExtra("Chave");
         if(chave.equals("C")) {
-            Toast.makeText(getContext(), "Coordenadas: " + latLng.toString(), Toast.LENGTH_SHORT).show();
             Intent i = new Intent(getContext(), Event_Detail_Motorista.class);
             String lat = String.valueOf(latLng.latitude);
             String longi = String.valueOf(latLng.longitude);

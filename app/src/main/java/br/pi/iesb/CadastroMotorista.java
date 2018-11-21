@@ -146,7 +146,6 @@ public class CadastroMotorista extends AppCompatActivity {
         emailFireBase = emailFireBase.replace(".","*");
         myRef.child(emailFireBase).setValue(x);
         enviarImg();
-        //myRef.push().setValue(x);
 
 
     }
