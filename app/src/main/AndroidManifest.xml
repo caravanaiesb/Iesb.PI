@@ -76,6 +76,7 @@
         <activity android:name=".CadastroCarona" />
         <activity android:name=".PassageiroLista" />
         <activity android:name=".PerfilActivity" />
+        <activity android:name=".AmigoLista"></activity>
     </application>
 
 </manifest>

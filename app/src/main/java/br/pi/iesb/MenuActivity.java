@@ -138,9 +138,15 @@ public class MenuActivity extends AppCompatActivity
             Intent i = new Intent(MenuActivity.this,FeedeventActivity.class);
             startActivity(i);
         }
+        else if(id == R.id.friendList){
+            Intent i = new Intent(MenuActivity.this,AmigoLista.class);
+            startActivity(i);
+
+        }
         else if(id== R.id.menuSair){
             signOut();
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -6,13 +6,17 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/icon_eventos"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@mipmap/feed_eventt"
             android:title="@string/feed_de_eventos" />
+        <item
+            android:id="@+id/friendList"
+            android:icon="@mipmap/friendlistt"
+            android:title="Lista de Amigos" />
     </group>
     <group android:checkableBehavior="all">
         <item
             android:id="@+id/menuSair"
-            android:icon="@drawable/ic_sair"
+            android:icon="@mipmap/ic_sairr"
             android:title="@string/Sair" />
     </group>
 
