@@ -57,6 +57,7 @@ public class CadastroeventoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cadastroevento);
+        setTitle("Cadastrar Evento");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         inicializaComponentes();

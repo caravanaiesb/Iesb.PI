@@ -46,6 +46,7 @@ public class CadastroMotorista extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_motorista);
         inicializaComponentes();
+        setTitle("Cadastro Motorista");
         eventoClicks();
     }
 

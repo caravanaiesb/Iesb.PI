@@ -46,6 +46,7 @@ public class MenuActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Caravana");
         auth = Dao.getFirebaseAuth();
         conectarGoogleApi();
         eventoClicks();
@@ -119,8 +120,6 @@ public class MenuActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent i = new Intent(MenuActivity.this,CadastroeventoActivity.class);
-            startActivity(i);
 
         }
 

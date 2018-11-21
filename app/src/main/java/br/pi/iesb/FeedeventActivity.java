@@ -69,9 +69,7 @@ public class FeedeventActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setTitle("Lista de Eventos");
         mostrarFeed();
-
     }
-
     private void mostrarFeed() {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Eventos");

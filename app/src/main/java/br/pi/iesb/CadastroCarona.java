@@ -57,7 +57,7 @@ public class CadastroCarona extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_carona);
-        setTitle("Registro na carona");
+        setTitle("Registro da carona");
         inicializaComponentes();
         exibirDados();
         eventoClicks();

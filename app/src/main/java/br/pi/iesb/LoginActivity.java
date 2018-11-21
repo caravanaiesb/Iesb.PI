@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("   Caravana");
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.login);
@@ -196,7 +197,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Intent i =  new Intent(LoginActivity.this,FeedeventActivity.class);
+                            String chave = "L";
+                            Intent i =  new Intent(LoginActivity.this,MenuActivity.class);
+                            i.putExtra("Chave",chave);
                             startActivity(i);
                         }else{
                             alert("E-mail ou Senha Invalido");

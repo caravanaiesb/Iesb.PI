@@ -203,6 +203,8 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         i.putExtra("Chave","M");
         startActivity(i);
 
+    }
+    if(chave.equals("L")){
 
     }
     }
