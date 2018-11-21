@@ -80,6 +80,7 @@ public class Event_Detail_Motorista extends AppCompatActivity {
                             String emailMotorista = c.getEmailUsuario().toString();
                             emailMotorista = emailMotorista.replace("@","_");
                             emailMotorista = emailMotorista.replace(".","*");
+                            c.setEvento(posicao);
                             c.setPartidaLatitude(latitude);
                             c.setPartidaLongitude(longitude);
                             Toast.makeText(Event_Detail_Motorista.this,"Você está participando do evento!",Toast.LENGTH_SHORT);
@@ -100,7 +101,7 @@ public class Event_Detail_Motorista extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Event_Detail_Motorista.this,MenuActivity.class);
-                Toast.makeText(Event_Detail_Motorista.this,"Clique no local do evento!",Toast.LENGTH_LONG).show();
+                Toast.makeText(Event_Detail_Motorista.this,"Clique no ponto de partida da Carona!",Toast.LENGTH_LONG).show();
                 i.putExtra("key",posicao);
                 i.putExtra("Chave","C");
                 startActivity(i);

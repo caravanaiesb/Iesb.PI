@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Camera;
 import android.location.Criteria;
 import android.location.Location;
@@ -25,6 +27,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
@@ -44,9 +48,11 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     private static final String TAG = "MapsFragment";
     private GoogleMap mMap;
     private LocationManager locationManager;
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
+    private FirebaseDatabase firebaseDatabase,firebaseDatabaseCarona;
+    private DatabaseReference databaseReference,databaseReferenceCarona;
     private List<Evento> eventosLista = new ArrayList<>();
+    private BitmapDescriptor icon;
+    private List<Usuario> usuartioLista = new ArrayList<>();
 
 
 
@@ -95,24 +101,13 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             if(lastKnownLocation==null){
                 Location loc = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
                 LatLng userLocation = new LatLng(loc.getLatitude(), loc.getLongitude());
-                //MarkerOptions marker = new MarkerOptions();
-                //marker.position(userLocation);
-                //marker.title("Aqui O");
                 LatLng latLng = new LatLng(userLocation.latitude, userLocation.longitude);
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15);
                 mMap.animateCamera(cameraUpdate);
                 }else{
             LatLng userLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
             MarkerOptions marker = new MarkerOptions();
-            //marker.position(userLocation);
-            //marker.title("Aqui O");
-            //marker = new MarkerOptions();
-            //marker.position(userLocation);
-
             MarkerOptions markEventos = new MarkerOptions();
-
-            //marker.title("Marker em Sidney");
-            //mMap.addMarker(marker);
             LatLng latLng = new LatLng(userLocation.latitude, userLocation.longitude);
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15);
             mMap.animateCamera(cameraUpdate);
@@ -120,7 +115,6 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             // Recuperar EVENTOS e plotar localizacoes no map
                 firebaseDatabase = FirebaseDatabase.getInstance();
                 databaseReference = firebaseDatabase.getReference("Eventos");
-
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -137,6 +131,34 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                             marker.position(eventolocation);
                             marker.title(model.getTxtNomeEvento());
                             mMap.addMarker(marker);
+
+                            firebaseDatabaseCarona = FirebaseDatabase.getInstance();
+                            databaseReferenceCarona = firebaseDatabaseCarona.getReference("Eventos/"+model.getTxtNomeEvento()+"/Motoristas Disponiveis/");
+                            databaseReferenceCarona.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    usuartioLista.clear();
+                                    for(DataSnapshot snap : dataSnapshot.getChildren()){
+                                        Usuario c =snap.getValue(Usuario.class);
+                                        Log.d("Carona",c.toString());
+                                        usuartioLista.add(c);
+                                    }
+                                    for(int j=0;j<usuartioLista.size();j++){
+                                        Usuario model = usuartioLista.get(j);
+                                        LatLng pontodepartida = new LatLng(Double.parseDouble(model.getPartidaLatitude()), Double.parseDouble(model.getPartidaLongitude()));
+                                        MarkerOptions marker = new MarkerOptions();
+                                        marker.position(pontodepartida);
+                                        marker.title(model.getEvento());
+                                        icon = BitmapDescriptorFactory.fromResource(R.drawable.marker);
+                                        marker.snippet(model.getNomeUsuario()).icon(icon);
+                                        mMap.addMarker(marker);
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
                         }
                     }
                     @Override
@@ -144,6 +166,8 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
                     }
                 });
+                //RECUPERA PONTOS DE PARTIDA DAS CARONAS
+
         }}
         catch (SecurityException ex)
         {
@@ -159,8 +183,10 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             Intent i = new Intent(getContext(), Event_Detail_Motorista.class);
             String lat = String.valueOf(latLng.latitude);
             String longi = String.valueOf(latLng.longitude);
+            String posicao = getActivity().getIntent().getStringExtra("key");
             i.putExtra("latitude", lat);
             i.putExtra("long", longi);
+            i.putExtra("key",posicao);
             startActivity(i);
         }
     if(chave.equals("E")) {
