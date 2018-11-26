@@ -24,10 +24,14 @@ public class SelecionaCadastroActivity extends AppCompatActivity {
     }
 
     public void eventoClicks(){
+        final String chave = getIntent().getStringExtra("Chave2");
         btnPassageiro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(SelecionaCadastroActivity.this,RegistroActivity.class);
+                if(chave.equals("G")){
+                    i.putExtra("Chave2","G");
+                }
                 startActivity(i);
                 finish();
             }
@@ -36,6 +40,9 @@ public class SelecionaCadastroActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(SelecionaCadastroActivity.this,CadastroMotorista.class);
+                if(chave.equals("G")){
+                    i.putExtra("Chave2","G");
+                }
                 startActivity(i);
                 finish();
             }

@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -38,6 +39,8 @@ public class CadastroMotorista extends AppCompatActivity {
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageRefe = storage.getReference();
     private Uri filePath;
+    private FirebaseAuth auth2;
+    private FirebaseUser firebaseUser;
     private final int PICK_IMAGE_REQUEST = 71;
 
 
@@ -48,6 +51,13 @@ public class CadastroMotorista extends AppCompatActivity {
         inicializaComponentes();
         setTitle("Cadastro Motorista");
         eventoClicks();
+        String chave = getIntent().getStringExtra("Chave2");
+        if(chave.equals("G")){
+            auth2 = Dao.getFirebaseAuth();
+            firebaseUser = auth2.getCurrentUser();
+            emailUsuario.setText(firebaseUser.getEmail());
+            nomeUsuario.setText(firebaseUser.getDisplayName());
+        }
     }
 
 
@@ -61,7 +71,14 @@ public class CadastroMotorista extends AppCompatActivity {
                             String email = emailUsuario.getText().toString().trim();
                             String nome = nomeUsuario.getText().toString().trim();
                             String senha = senhaUsuario.getText().toString().trim();
-                            criarLoginMotorista(email,senha);
+                            String chave = getIntent().getStringExtra("Chave2");
+                            if (chave.equals("G")){
+                                cadastrarRealtime();
+                            }
+                            else{
+                                criarLoginMotorista(email,senha);
+                            }
+
                         }else{
                             alert("Preencha todos campos");
                         }
@@ -169,6 +186,7 @@ public class CadastroMotorista extends AppCompatActivity {
                             progressDialog.dismiss();
                             Toast.makeText(CadastroMotorista.this, "Uploaded", Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(CadastroMotorista.this,MenuActivity.class);
+                            i.putExtra("Chave","L");
                             startActivity(i);
                             finish();
                         }

@@ -38,6 +38,11 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     private EditText edtEmail,edtSenha;
@@ -49,6 +54,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private CallbackManager callbackManager;
     private AccessToken accessToken;
     private LoginButton btnLoginFacebook;
+    private FirebaseAuth auth2;
+    private FirebaseUser firebaseUser;
+    private FirebaseDatabase firedatabase;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,9 +191,45 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         String chave = "L";
-                        Intent i = new Intent(LoginActivity.this,MenuActivity.class);
-                        i.putExtra("Chave",chave);
-                        startActivity(i);
+                        auth2 = Dao.getFirebaseAuth();
+                        firebaseUser = auth2.getCurrentUser();
+                        String emailFireBase = firebaseUser.getEmail();
+                        emailFireBase = emailFireBase.replace("@","_");
+                        emailFireBase = emailFireBase.replace(".","*");
+
+                        firedatabase = FirebaseDatabase.getInstance();
+                        databaseReference = firedatabase.getReference("Usuarios/"+emailFireBase);
+                        databaseReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                dataSnapshot.getChildren();
+                                Usuario c = dataSnapshot.getValue(Usuario.class);
+                                if(c==null){
+                                    Intent i = new Intent(LoginActivity.this,SelecionaCadastroActivity.class);
+                                    i.putExtra("Chave","L");
+                                    i.putExtra("Chave2","G");
+                                    startActivity(i);
+
+                                }
+                                else {
+                                    Intent k = new Intent(LoginActivity.this,MenuActivity.class);
+                                    k.putExtra("Chave","L");
+                                    k.putExtra("Chave2","G");
+                                    startActivity(k);
+
+                                }
+
+                            }
+
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+
+
                     }
                     else{
                         alert("Email Ou Senha Invalidos");

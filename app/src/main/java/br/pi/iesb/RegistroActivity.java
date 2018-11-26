@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -39,6 +40,8 @@ public class RegistroActivity extends AppCompatActivity {
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageRefe = storage.getReference();
     private Uri filePath;
+    private FirebaseAuth auth2;
+    private FirebaseUser firebaseUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,13 @@ public class RegistroActivity extends AppCompatActivity {
         setTitle("Cadastro Passageiro");
         inicializaComponentes();
         eventoClicks();
+        String chave = getIntent().getStringExtra("Chave2");
+        if(chave.equals("G")){
+            auth2 = Dao.getFirebaseAuth();
+            firebaseUser = auth2.getCurrentUser();
+            edtEmail.setText(firebaseUser.getEmail());
+            edtNome.setText(firebaseUser.getDisplayName());
+        }
     }
     private void eventoClicks(){
         btnVoltar.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +73,14 @@ public class RegistroActivity extends AppCompatActivity {
                 String email = edtEmail.getText().toString().trim();
                 String nome = edtNome.getText().toString().trim();
                 String senha = edtSenha.getText().toString().trim();
-                criarUser(email,nome,senha);
+                    String chave = getIntent().getStringExtra("Chave2");
+                    if (chave.equals("G")){
+                        registrarPassageiroFirebase();
+                    }
+                    else{
+                        criarUser(email,nome,senha);
+                    }
+
             }else{
                     alert("Preencha os campos");
                 }
@@ -146,6 +163,7 @@ public class RegistroActivity extends AppCompatActivity {
                             progressDialog.dismiss();
                             Toast.makeText(RegistroActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(RegistroActivity.this,MenuActivity.class);
+                            i.putExtra("Chave","L");
                             startActivity(i);
                             finish();
                         }

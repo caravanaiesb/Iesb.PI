@@ -206,4 +206,14 @@ public class FeedeventActivity extends AppCompatActivity {
             return eventosLista.size();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(FeedeventActivity.this,MenuActivity.class);
+        i.putExtra("Chave","L");
+        startActivity(i);
+        finish();
+
+    }
 }

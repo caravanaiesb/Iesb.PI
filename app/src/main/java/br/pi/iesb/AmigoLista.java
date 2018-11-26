@@ -98,7 +98,7 @@ public class AmigoLista extends AppCompatActivity {
             amigoRecyckeVuew.nomeUsuario.setText(usuar.getNomeUsuario());
             amigoRecyckeVuew.idadeUsuario.setText(usuar.getIdadeUsuario());
 
-            amigoRecyckeVuew.itemView.setTag(i);
+           //amigoRecyckeVuew.itemView.setTag(i);
         }
         @Override
         public int getItemCount() {

@@ -103,6 +103,9 @@ public class CadastroeventoActivity extends AppCompatActivity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
                             Toast.makeText(CadastroeventoActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(CadastroeventoActivity.this,FeedeventActivity.class);
+                            i.putExtra("Chave","L");
+                            startActivity(i);
                             finish();
                         }
                     })
@@ -174,9 +177,8 @@ public class CadastroeventoActivity extends AppCompatActivity {
 
            // myRef.push().setValue(c);
             enviarImg();
-            Intent i = new Intent(CadastroeventoActivity.this,FeedeventActivity.class);
-            startActivity(i);
-            finish();
+
+
         }
         else {
             alert("Falha ao tentar cadastrar novo evento");

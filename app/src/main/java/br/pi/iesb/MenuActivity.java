@@ -137,10 +137,12 @@ public class MenuActivity extends AppCompatActivity
         if (id == R.id.icon_eventos) {
             Intent i = new Intent(MenuActivity.this,FeedeventActivity.class);
             startActivity(i);
+            finish();
         }
         else if(id == R.id.friendList){
             Intent i = new Intent(MenuActivity.this,AmigoLista.class);
             startActivity(i);
+            finish();
 
         }
         else if(id== R.id.menuSair){

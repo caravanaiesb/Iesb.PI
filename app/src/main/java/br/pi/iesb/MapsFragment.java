@@ -191,6 +191,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             i.putExtra("long", longi);
             i.putExtra("key",posicao);
             startActivity(i);
+            getActivity().finish();
         }
     if(chave.equals("E")) {
         Intent i = new Intent(getContext(), CadastroeventoActivity.class);
@@ -202,6 +203,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         i.putExtra("key", posicao);
         i.putExtra("Chave","M");
         startActivity(i);
+        getActivity().finish();
 
     }
     if(chave.equals("L")){
