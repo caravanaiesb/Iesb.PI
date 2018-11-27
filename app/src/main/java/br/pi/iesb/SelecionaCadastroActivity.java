@@ -32,6 +32,10 @@ public class SelecionaCadastroActivity extends AppCompatActivity {
                 if(chave.equals("G")){
                     i.putExtra("Chave2","G");
                 }
+                if(chave.equals("L")){
+                    i.putExtra("Chave2","L");
+
+                }
                 startActivity(i);
                 finish();
             }
@@ -42,6 +46,10 @@ public class SelecionaCadastroActivity extends AppCompatActivity {
                 Intent i = new Intent(SelecionaCadastroActivity.this,CadastroMotorista.class);
                 if(chave.equals("G")){
                     i.putExtra("Chave2","G");
+                }
+                if(chave.equals("L")){
+                    i.putExtra("Chave2","L");
+
                 }
                 startActivity(i);
                 finish();

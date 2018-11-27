@@ -58,6 +58,9 @@ public class CadastroMotorista extends AppCompatActivity {
             emailUsuario.setText(firebaseUser.getEmail());
             nomeUsuario.setText(firebaseUser.getDisplayName());
         }
+        if(chave.equals("L")){
+
+        }
     }
 
 

@@ -56,6 +56,9 @@ public class RegistroActivity extends AppCompatActivity {
             edtEmail.setText(firebaseUser.getEmail());
             edtNome.setText(firebaseUser.getDisplayName());
         }
+        if(chave.equals("L")){
+
+        }
     }
     private void eventoClicks(){
         btnVoltar.setOnClickListener(new View.OnClickListener() {

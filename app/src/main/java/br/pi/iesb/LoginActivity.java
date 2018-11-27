@@ -101,7 +101,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             @Override
             public void onClick(View v) {
                  Intent i= new Intent(getApplicationContext(),SelecionaCadastroActivity.class);
-                 startActivity(i);
+                 i.putExtra("Chave","L");
+                i.putExtra("Chave2","L");
+
+                startActivity(i);
+
             }
         });
 
