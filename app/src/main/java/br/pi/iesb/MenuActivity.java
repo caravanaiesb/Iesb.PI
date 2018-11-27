@@ -145,6 +145,11 @@ public class MenuActivity extends AppCompatActivity
             finish();
 
         }
+        else if(id == R.id.recomendacaoList){
+            Intent i = new Intent(MenuActivity.this,RecomendacaoLista.class);
+            startActivity(i);
+            finish();
+        }
         else if(id== R.id.menuSair){
             signOut();
         }

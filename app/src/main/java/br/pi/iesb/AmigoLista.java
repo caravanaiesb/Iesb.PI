@@ -105,4 +105,13 @@ public class AmigoLista extends AppCompatActivity {
             return usuartioPLista.size();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(AmigoLista.this,MenuActivity.class);
+        i.putExtra("Chave","L");
+        startActivity(i);
+        finish();
+    }
 }

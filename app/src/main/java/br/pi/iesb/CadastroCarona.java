@@ -274,4 +274,13 @@ public class CadastroCarona extends AppCompatActivity {
         img_Motorista = (ImageView) findViewById(R.id.img_Motorista);
         txtLocation = (TextView) findViewById(R.id.txtLocation);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(CadastroCarona.this,FeedeventActivity.class);
+        startActivity(i);
+        finish();
+
+    }
 }

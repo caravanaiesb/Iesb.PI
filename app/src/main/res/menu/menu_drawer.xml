@@ -12,6 +12,10 @@
             android:id="@+id/friendList"
             android:icon="@mipmap/friendlistt"
             android:title="Lista de Amigos" />
+        <item
+            android:id="@+id/recomendacaoList"
+            android:icon="@mipmap/friendlistt"
+            android:title="Recomendação de Amigos" />
     </group>
     <group android:checkableBehavior="all">
         <item
