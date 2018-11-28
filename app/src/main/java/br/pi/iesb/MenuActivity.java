@@ -152,6 +152,9 @@ public class MenuActivity extends AppCompatActivity
         }
         else if(id== R.id.menuSair){
             signOut();
+            Intent i = new Intent(MenuActivity.this,LoginActivity.class);
+            startActivity(i);
+            finish();
         }
 
 

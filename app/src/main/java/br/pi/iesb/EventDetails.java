@@ -65,7 +65,7 @@ public class EventDetails extends AppCompatActivity {
                             String clickposi = String.valueOf(posicao);
                             i.putExtra("key", clickposi);
                             startActivity(i);
-                            finish();
+
                         }
                     }
 

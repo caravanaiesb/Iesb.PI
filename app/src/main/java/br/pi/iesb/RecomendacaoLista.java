@@ -121,6 +121,20 @@ public class RecomendacaoLista extends AppCompatActivity {
             Usuario usuar = usuartioRecLista.get(i);
             recomendacaoRecycleView.nomeUsuarioRec.setText(usuar.getNomeUsuario());
             recomendacaoRecycleView.idadeUsuarioRec.setText(usuar.getIdadeUsuario());
+            final String[] usuarioClickado = {usuar.getEmailUsuario()};
+
+            recomendacaoRecycleView.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent z = new Intent(RecomendacaoLista.this, PerfilActivity.class);
+                    z.putExtra("key", "a");
+                    usuarioClickado[0] = usuarioClickado[0].replace("@","_");
+                    usuarioClickado[0] = usuarioClickado[0].replace(".","*");
+                    z.putExtra("key2", usuarioClickado[0]);
+                    startActivity(z);
+                }
+            });
         }
         @Override
         public int getItemCount() {
